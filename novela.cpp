@@ -2,7 +2,7 @@
 using namespace std;
 
 //Constructor
-Novela :: Novela(string titulo, unsigned int minutos, unsigned short int anio, genero_t genero, Escritor* autor) : Lectura(titulo, minutos, anio, autor) {
+Novela :: Novela(char tipo, string titulo, unsigned int minutos, unsigned short int anio, genero_t genero, Escritor* autor) : Lectura(tipo, titulo, minutos, anio, autor) {
    this->genero = genero;
 }
 

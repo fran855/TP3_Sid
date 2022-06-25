@@ -13,7 +13,7 @@ public:
   // Constructor
   // PRE: titulo string no vacío, minutos >= 0, anio > 0, libro string no vacío, autor puntero valido
   // POS: -
-  Cuento (string titulo, unsigned int minutos, unsigned short int anio, string libro, Escritor* autor);
+  Cuento (char tipo, string titulo, unsigned int minutos, unsigned short int anio, string libro, Escritor* autor);
 
   // Mostrar titulo
   // PRE: -

@@ -163,7 +163,7 @@ void Menu::nueva_lectura()
         cout << MSJ_INGRESAR_LIBRO << endl;
         getline(cin, libro, '\n');
         autor = obtener_autor(lista_escritores);
-        nueva_lectura = new Cuento(titulo, minutos, anio, libro, autor);
+        nueva_lectura = new Cuento('C', titulo, minutos, anio, libro, autor);
         lista_lecturas->alta(nueva_lectura);
     }
     else if (tipo_lectura == 'n')
@@ -178,13 +178,13 @@ void Menu::nueva_lectura()
             getline(cin, auxiliar, '\n');
             char* tema = obtener_tema(auxiliar);
             autor = obtener_autor(lista_escritores);
-            nueva_lectura = new Novela_historica(titulo, minutos, anio, tema, autor);
+            nueva_lectura = new Novela_historica('H', titulo, minutos, anio, tema, autor);
             lista_lecturas->alta(nueva_lectura);
         }
         else
         {
             autor = obtener_autor(lista_escritores);
-            nueva_lectura = new Novela(titulo, minutos, anio, genero, autor);
+            nueva_lectura = new Novela('N', titulo, minutos, anio, genero, autor);
             lista_lecturas->alta(nueva_lectura);
         }
     }
@@ -195,7 +195,7 @@ void Menu::nueva_lectura()
         cin >> versos;
         getline(cin, auxiliar, '\n'); // Limpiar buffer
         autor = obtener_autor(lista_escritores);
-        nueva_lectura = new Poema(titulo, minutos, anio, versos, autor);
+        nueva_lectura = new Poema('P', titulo, minutos, anio, versos, autor);
         lista_lecturas->alta(nueva_lectura);
     }
 }

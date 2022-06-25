@@ -15,7 +15,7 @@ public:
   // Constructor
   // PRE: titulo string no vacío, minutos >= 0, anio > 0, versos > 0, autor puntero valido
   // POS: -
-  Poema(string titulo, unsigned int minutos, unsigned short int anio, unsigned int versos, Escritor* autor);
+  Poema(char tipo, string titulo, unsigned int minutos, unsigned short int anio, unsigned int versos, Escritor* autor);
   
   // Mostrar
   // PRE: - 

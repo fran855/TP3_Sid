@@ -11,6 +11,7 @@ using namespace std;
 class Lectura {
     // Atributos
 protected:
+    char tipo;
     string titulo;
     unsigned int minutos;
     unsigned short int anio;
@@ -23,7 +24,7 @@ public:
     // PRE: minutos >= 0, anio >= 0
     // POS: realiza la carga de los datos al objeto Lectura. 
     //      - en caso de ser proveniente de un autor anonimo, autor = nullptr;
-    Lectura(string titulo, unsigned int minutos, unsigned short int anio, Escritor* autor);
+    Lectura(char tipo, string titulo, unsigned int minutos, unsigned short int anio, Escritor* autor);
 
     // Constructor por defecto  
     Lectura();
@@ -76,6 +77,11 @@ public:
     // PRE: -
     // POS: devulve un puntero a un objeto de tipo Escritor
     Escritor* obtener_autor();
+
+    // Obtener tipo lectura
+    // PRE: -
+    // POS: devuelve un caracter con el tipo de lectura
+    char obtener_tipo();
 
 };
 

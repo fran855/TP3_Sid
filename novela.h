@@ -16,7 +16,7 @@ public:
   // Constructor:
   // PRE: titulo string no vacío, minutos >= 0, anio > 0, genero valido, autor puntero valido
   // POS: -
-  Novela(string titulo, unsigned int minutos, unsigned short int anio, genero_t genero, Escritor* autor);
+  Novela(char tipo, string titulo, unsigned int minutos, unsigned short int anio, genero_t genero, Escritor* autor);
 
   // Mostrar genero
   // PRE: -

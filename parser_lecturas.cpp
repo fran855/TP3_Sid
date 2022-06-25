@@ -39,7 +39,7 @@ void Parser_lectura:: procesar_datos(Lista<Escritor>* lista_escritores, Lista<Le
     if (tipo_lectura == "C"){
       getline(archivo_lectura, libro);
       autor = obtener_autor(lista_escritores);
-      nueva_lectura = new Cuento(titulo, minutos, anio, libro, autor);
+      nueva_lectura = new Cuento('C', titulo, minutos, anio, libro, autor);
       lista_lecturas -> alta(nueva_lectura);
     }
     else if (tipo_lectura == "N"){
@@ -50,11 +50,11 @@ void Parser_lectura:: procesar_datos(Lista<Escritor>* lista_escritores, Lista<Le
         getline(archivo_lectura, auxiliar);
         tema = obtener_tema(auxiliar);
         autor = obtener_autor(lista_escritores);
-        nueva_lectura = new Novela_historica(titulo, minutos, anio, tema, autor);
+        nueva_lectura = new Novela_historica('H', titulo, minutos, anio, tema, autor);
         lista_lecturas -> alta(nueva_lectura);
       }else{
         autor = obtener_autor(lista_escritores);
-        nueva_lectura = new Novela(titulo, minutos, anio, genero, autor);
+        nueva_lectura = new Novela('N', titulo, minutos, anio, genero, autor);
         lista_lecturas -> alta(nueva_lectura);
       }
     }
@@ -62,7 +62,7 @@ void Parser_lectura:: procesar_datos(Lista<Escritor>* lista_escritores, Lista<Le
       getline(archivo_lectura, auxiliar);
       versos = stoi(auxiliar);
       autor = obtener_autor(lista_escritores);
-      nueva_lectura = new Poema(titulo, minutos, anio, versos, autor);
+      nueva_lectura = new Poema('P', titulo, minutos, anio, versos, autor);
       lista_lecturas -> alta(nueva_lectura);
     }
   
