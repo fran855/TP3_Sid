@@ -9,7 +9,7 @@ class Nodo{
 	// Atributos
 private:
 	Tipo* dato;
-	Nodo* siguiente;             
+	Nodo* siguiente;     
 
 	// Metodos
 public:
