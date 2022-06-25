@@ -1,94 +1,94 @@
 #include "grafos.h"
 
-Grafo::Grafo() {
+Grafo::Grafo(Lista<Lectura>* lista_lectura) {
     matriz_adyacencia = nullptr;
-    vertices = new Lista<Vertice>();
+    this->lista_lecturas = lista_lectura;
+}
+
+
+
+void Grafo::agregar_camino(Lectura* origen, Lectura* destino, int peso) {
+    int posicion_origen = lista_lecturas -> obtener_posicion(origen);
+    int posicion_destino = lista_lecturas -> obtener_posicion(destino);
+
+    matriz_adyacencia[posicion_origen][posicion_destino] = peso; 
+    matriz_adyacencia[posicion_destino][posicion_origen] = peso;
+}
+
+
+void Grafo::procesar_datos(Lectura* Lectura1, Lectura* Lectura2){
+  char tipo_lec_1 = Lectura1 -> obtener_tipo();
+  char tipo_lec_2 = Lectura2 -> obtener_tipo();
+
+  if((tipo_lec_1 == 'C' && tipo_lec_2 == 'N') || (tipo_lec_2 == 'C' && tipo_lec_1 == 'N'))
+    agregar_camino(Lectura1, Lectura2, CUENTO_A_NOVELA);
+  
+  if((tipo_lec_1 == 'C' && tipo_lec_2 == 'H') || (tipo_lec_2 == 'C' && tipo_lec_1 == 'H'))
+    agregar_camino(Lectura1, Lectura2, CUENTO_A_NOVELA_HISTORICA);
+  
+  if((tipo_lec_1 == 'C' && tipo_lec_2 == 'P') || (tipo_lec_2 == 'C' && tipo_lec_1 == 'P'))
+    agregar_camino(Lectura1, Lectura2, CUENTO_A_POEMA);
+  
+  if((tipo_lec_1 == 'P' && tipo_lec_2 == 'N') || (tipo_lec_2 == 'N' && tipo_lec_1 == 'P'))
+    agregar_camino(Lectura1, Lectura2, POEMA_A_NOVELA);
+  
+  if((tipo_lec_1 == 'P' && tipo_lec_2 == 'H') || (tipo_lec_2 == 'H' && tipo_lec_1 == 'P'))
+    agregar_camino(Lectura1, Lectura2, POEMA_A_NOVELA_HISTORICA);
+
+  if((tipo_lec_1 == 'N' && tipo_lec_2 == 'H') || (tipo_lec_2 == 'H' && tipo_lec_1 == 'N'))
+    agregar_camino(Lectura1, Lectura2, NOVELA_A_NOVELA_HISTORICA);
+
+  if (tipo_lec_1 == 'C' && tipo_lec_2 == 'C')
+    agregar_camino(Lectura1, Lectura2, CUENTO_A_CUENTO);
+  
+  if (tipo_lec_1 == 'P' && tipo_lec_2 == 'P')
+    agregar_camino(Lectura1, Lectura2, POEMA_A_POEMA);
+  
+  if (tipo_lec_1 == 'N' && tipo_lec_2 == 'N')
+    agregar_camino(Lectura1, Lectura2, NOVELA_A_NOVELA);
+
+  if (tipo_lec_1 == 'H' && tipo_lec_2 == 'H')
+    agregar_camino(Lectura1, Lectura2, NOVELA_HISTORICA_A_NOVELA_HISTORICA);
 }
 
 
 
 
-void Grafo::agregar_vertice(string nuevo_vertice) {
-    agrandar_matriz_adyacencia();
-    vertices -> agregar(nuevo_vertice);
-}
+void Grafo::generar_grafo(){
+  Nodo<Lectura>* actual = lista_lecturas -> obtener_nodo(1);
+  
+  Nodo<Lectura>* siguiente = actual -> obtener_siguiente();
+  
+  matriz_adyacencia = new int*[lista_lecturas -> obtener_cantidad()];  
 
-
-
-// A MODIFICAR
-void Grafo::agregar_camino(string origen, string destino, int peso) {
-    int posicion_origen = vertices ->obtener_posicion(origen);
-    int posicion_destino = vertices ->obtener_posicion(destino);
-
-    if(posicion_origen == POSICION_NO_ENCONTRADA){
-        cout << "El vertice " << origen << " no existe en el grafo" << endl;
+  for(int i = 0; i < lista_lecturas -> obtener_cantidad(); i++){
+    matriz_adyacencia[i] =  new int[lista_lecturas -> obtener_cantidad()];
+    for (int j = 0;  j < lista_lecturas -> obtener_cantidad(); j++ ){
+      matriz_adyacencia[i][j] = -1;
     }
-    if(posicion_destino == POSICION_NO_ENCONTRADA){
-        cout << "El vertice " << destino << " no existe en el grafo" << endl;
-    }
-
-    if(!(posicion_destino == POSICION_NO_ENCONTRADA || posicion_origen == POSICION_NO_ENCONTRADA)) {
-        matriz_adyacencia[posicion_origen][posicion_destino] = peso;
-        matriz_adyacencia[posicion_destino][posicion_origen] = peso;
-    }
-}
-
-
-void Grafo::unir(Nodo<Lectura>* Lectura1, Nodo<Lectura>* Lectura1){
-  char tipo_lec_1 = Lectura1 -> obtener_dato() -> obtener_tipo_lectura();
-  char tipo_lec_2 = Lectura2 -> obtener_dato() -> obtener_tipo_lectura();
-
-  if((tipo_lec_1 == 'C' && tipo_lec_2 == 'N') || (tipo_lec_1 == 'C' && tipo_lec_2 == 'N')){
-    
-
-    
   }
   
-
+  while (siguiente != nullptr){   
+    procesar_datos(actual -> obtener_dato(), siguiente -> obtener_dato());
+    actual = siguiente;
+    siguiente = actual -> obtener_siguiente();
+  }
   
 }
 
 
 
 
-void Grafo::agrandar_matriz_adyacencia() {
-    int** matriz_auxiliar;
-    int nueva_cantidad_vertices = vertices->obtenerCantidadDeElementos() + 1;
-
-    matriz_auxiliar = new int*[nueva_cantidad_vertices];
-    for(int i = 0; i < nueva_cantidad_vertices; i++){
-        matriz_auxiliar[i] = new int[nueva_cantidad_vertices];
+void Grafo::liberar_matriz_adyacencia() {
+    for(int i = 0; i < lista_lecturas -> obtener_cantidad(); i++){
+        delete[] matriz_adyacencia[i];
     }
+    delete[] matriz_adyacencia;
+}
 
-    copiar_matriz_adyacente(matriz_auxiliar);
-    inicializar_nuevo_vertice(matriz_auxiliar);
+
+Grafo::~Grafo() {
     liberar_matriz_adyacencia();
-    matriz_adyacencia = matriz_auxiliar;
-}
-
-
-void Grafo::inicializar_nuevo_vertice(int** nueva_adyacente) {
-    for(int i = 0; i < vertices -> obtener_cantidad_elementos(); i++){
-        nueva_adyacente[vertices -> obtener_cantidad_elementos()][i] = INFINITO;
-        nueva_adyacente[i][vertices -> obtener_cantidad_elementos()] = INFINITO;
-    }
-    nueva_adyacente[vertices -> obtener_cantidad_elementos()][vertices -> obtenerCantidadDeElementos()] = 0;
-}
-
-
-
-void Grafo::copiarMatrizAdyacente(int** nuevaAdyacente) {
-    for(int i = 0; i < vertices -> obtenerCantidadDeElementos(); i++){
-        for(int j = 0; j < vertices -> obtenerCantidadDeElementos(); j++){
-            nuevaAdyacente[i][j] = matrizDeAdyacencia[i][j];
-        }
-    }
-}
-
-
-void Grafo::liberarMatrizAdyacencia() {
-    for(int i = 0; i < vertices -> obtenerCantidadDeElementos(); i++){
-        delete[] matrizDeAdyacencia[i];
-    }
-    delete[] matrizDeAdyacencia;
+    matriz_adyacencia = nullptr;
+    lista_lecturas = nullptr;
 }

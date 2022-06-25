@@ -2,40 +2,40 @@
 #define GRAFOS_H
 
 #include <string>
-#include "Lista.h"
-#include "Vertice.h"
+#include "lista.h"
+#include "caminos.h"
+
 using namespace std;
 
 class Grafo {
 /*ATRIBUTOS*/
 private:
-  int ** matrizDeAdyacencia;
-  Lista<Vertice> * vertices;
+  int ** matriz_adyacencia;
+  Lista<Lectura> * lista_lecturas;
 
 
 /*MÉTODOS*/
 
-	//pre: la matriz que se le envie ya debe tener memoria reservada
-    //post: copia la matriz de adyacencia en la nueva matriz
-    void copiarMatrizAdyacente(int** nuevaAdyacente);
 
-  //post: agranda dinamicamente la matriz de adyacencia
-  void agrandarMatrizDeAdyacencia();
+  //post libera la memoria de la matriz de adyacencia
+  void liberar_matriz_adyacencia();
 
-    //post libera la memoria de la matriz de adyacencia
-  void liberarMatrizAdyacencia();
+  //pre: el peso es mayor o igual 0, origen y destino punteros existentes en lista lecturas
+  //post: Ajusta la matriz de adyacencia con el peso ingresado
+  void agregar_camino(Lectura* origen, Lectura* destino, int peso);
+  
+  //pre: lecturas dentro de la lista de lecturas
+  //pos: genera camino entre las dos lecturas
+  void procesar_datos(Lectura* origen, Lectura* destino);
 
 public:
   //Constructor
-  Grafo();
+  Grafo(Lista<Lectura>* lista_lectura);
 
-  //pre: No hay vertices repetidos en nombre
-  //post: agrega un nuevo vertice al grafo
-  void agregarVertice(string nuevoVertice);
 
-  //pre: el peso es un valor positivo
-  //post: Ajusta la matriz de adyacencia con el peso ingresado
-  void agregarCamino(string origen, string destino, int peso);
+  // pre: lista_lecturas != null
+  // pos: genera el grafo a partir de la lista
+  void generar_grafo();
 
   //Destructor
   ~Grafo();

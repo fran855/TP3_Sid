@@ -41,6 +41,12 @@ public:
     //       devuelve 0 si son iguales
     int comparar(Lectura* lectura);
 
+		// Comparar titulos
+    // PRE:  lectura debe ser un puntero a Lectura valido
+    // POS:  devuelve 1 si la que llama es igual a la que se pasa por parámetro
+    //       devuelve 0 si son distintas
+		int comparar(Lectura* lectura, int m);
+
     // Comparar minutos de lectura
     // PRE: lectura debe ser un puntero valido
     // POS: devuelve – 1 si la lectura que llama tiene un tiempo de lectura menor a la que se pasa por parámetro

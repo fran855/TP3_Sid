@@ -34,6 +34,16 @@ int Lectura::comparar(Lectura* lectura){
     return resultado;
 };
 
+// Comaparar titulo
+int Lectura::comparar(Lectura* lectura, int m){
+    int resultado;
+    if (this -> titulo == lectura -> obtener_titulo())
+        resultado = 1;
+    else
+        resultado = 0;
+    return resultado;
+};
+
 // Comparar minutos de lectura
 int Lectura::comparar(Lectura* lectura, char m){
     int resultado;

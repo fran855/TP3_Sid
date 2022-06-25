@@ -53,6 +53,11 @@ public:
     // POS: devuelve la cantidad de elementos de la lista
     int obtener_cantidad();
 
+	// Obtener_posicion
+	// PRE: elemento válido
+	// POS: devuelve la posicion del elemento en la lista
+	int obtener_posicion(Tipo* elemento);
+
 	// Vacía
 	// PRE: -
 	// POS: devuelve true si la Lista está vacía, false de lo contrario
@@ -186,6 +191,21 @@ Tipo* Lista<Tipo>::consulta(int pos, char m){
 			contador++;
 	}
 	return &(aux -> obtener_dato());
+}
+
+//Obtener_posicion
+template <class Tipo>
+int Lista<Tipo>::obtener_posicion(Tipo* elemento){
+	Nodo<Tipo>* aux = primero;
+	int contador = 1;
+	while(aux != nullptr){
+		if(aux -> obtener_dato() -> comparar(elemento, 1)){
+			return contador;
+		}
+		aux = aux -> obtener_siguiente();
+		contador++;
+	}
+	return -1;
 }
 
 // Vacia
