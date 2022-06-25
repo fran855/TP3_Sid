@@ -16,9 +16,9 @@ int main(int argc, char * argv[]){
 	parser_escritores.procesar_datos();
   Parser_lectura parser_lecturas(argv);
   parser_lecturas.procesar_datos(lista_escritores, lista_lecturas);
-
-  Menu menu(lista_lecturas, lista_escritores);
-  menu.ejecutar_menu(cola_lecturas);
+	
+  //Menu menu(lista_lecturas, lista_escritores);
+  //menu.ejecutar_menu(cola_lecturas);
  
   delete lista_escritores;
   delete lista_lecturas;
