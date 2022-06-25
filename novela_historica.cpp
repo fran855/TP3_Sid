@@ -1,7 +1,7 @@
 #include "novela_historica.h"
 
 // Constructor
-Novela_historica :: Novela_historica(string titulo, unsigned int minutos, unsigned short int anio, char* tema, Escritor* autor): Novela(titulo, minutos, anio, genero, autor){
+Novela_historica :: Novela_historica(char tipo, string titulo, unsigned int minutos, unsigned short int anio, char* tema, Escritor* autor): Novela(tipo, titulo, minutos, anio, genero, autor){
   this->tema = tema;
   this->genero = HISTORICA;
 }

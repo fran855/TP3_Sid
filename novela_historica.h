@@ -17,7 +17,7 @@ public:
   // Constructor
   // PRE: titulo string no vacío, minutos >= 0, anio > 0, tema puntero valido, autor puntero valido
   // POS: -
-  Novela_historica(string titulo, unsigned int minutos, unsigned short int anio, char* tema, Escritor* autor);
+  Novela_historica(char tipo, string titulo, unsigned int minutos, unsigned short int anio, char* tema, Escritor* autor);
 
   // Mostrar tema
   // PRE: -

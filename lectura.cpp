@@ -2,7 +2,8 @@
 #include "lectura.h"
 
 // Constructor con parametros
-Lectura::Lectura (string titulo, unsigned int minutos, unsigned short int anio, Escritor* autor) {
+Lectura::Lectura (char tipo, string titulo, unsigned int minutos, unsigned short int anio, Escritor* autor) {
+    this -> tipo = tipo;
     this -> titulo = titulo;
     this -> minutos = minutos;
     this -> anio = anio;
@@ -11,6 +12,7 @@ Lectura::Lectura (string titulo, unsigned int minutos, unsigned short int anio, 
 
 // Constructor por defecto
 Lectura::Lectura () {
+    this -> tipo = '-';
     this -> titulo = "¿?";
     this -> minutos = 0;
     this -> anio = 0;
@@ -62,4 +64,9 @@ unsigned short int Lectura::obtener_anio() {
 // Obtener autor 
 Escritor* Lectura::obtener_autor() {
     return this -> autor;
+}
+
+// Obtener tipo
+char Lectura::obtener_tipo() {
+    return this -> tipo;
 }

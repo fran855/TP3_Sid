@@ -31,7 +31,6 @@ private:
     unsigned int versos;
     genero_t genero;
 
-
     // Metodos
 public:
     //Constructor
