@@ -48,10 +48,10 @@ public:
 	// POS: muestra por pantalla los elementos de la lista
 	void mostrar();
 
-    // Obtener_cantidad
-    // PRE: -
-    // POS: devuelve la cantidad de elementos de la lista
-    int obtener_cantidad();
+  // Obtener_cantidad
+  // PRE: -
+  // POS: devuelve la cantidad de elementos de la lista
+  int obtener_cantidad();
 
 	// Obtener_posicion
 	// PRE: elemento válido

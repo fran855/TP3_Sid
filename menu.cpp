@@ -377,7 +377,7 @@ void Menu::crear_cola(Cola<Lectura>* cola_lecturas){
         }
 
 }
-
+/*
 void Menu::tiempo_minimo(){
     Grafo* grafo = new Grafo(lista_lecturas);
     Lista<Camino>* lista_caminos = grafo -> crear_lista_caminos();
@@ -396,7 +396,10 @@ void Menu::tiempo_minimo(){
         }
     }
 
-}
+}*/
+
+
+
 
 Menu::~Menu(){
 }
