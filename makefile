@@ -6,8 +6,8 @@ all: sid clear
 #sid: main.cpp cola.h lectura.o escritor.o parser_escritores.o parser_lecturas.o novela.o novela_historica.o cuento.o genero.o poema.o
 #	$(CC) $(CFLAGS) main.cpp -o sid lectura.o escritor.o parser_escritores.o parser_lecturas.o novela.o novela_historica.o cuento.o genero.o poema.o 
 
-sid: main.cpp menu.o lectura.o escritor.o parser_escritores.o parser_lecturas.o novela.o novela_historica.o cuento.o genero.o poema.o funciones.o grafos.o
-	$(CC) $(CFLAGS) main.cpp -o sid menu.o lectura.o escritor.o parser_escritores.o parser_lecturas.o novela.o novela_historica.o cuento.o genero.o poema.o funciones.o grafos.o
+sid: main.cpp menu.o lectura.o escritor.o parser_escritores.o parser_lecturas.o novela.o novela_historica.o cuento.o genero.o poema.o funciones.o grafo.o
+	$(CC) $(CFLAGS) main.cpp -o sid menu.o lectura.o escritor.o parser_escritores.o parser_lecturas.o novela.o novela_historica.o cuento.o genero.o poema.o funciones.o grafo.o
 
 # main.o : main.cpp lecturas.cpp escritor.cpp parser_escritor.cpp parser_lectura.cpp novela.cpp novela_historica.cpp cuento.cpp genero.cpp poema.cpp lecturas.h escritor.h parser_escritor.h parser_lectura.h novela.h novela_historica.h cuento.h genero.h poema.h
 # 	$(CC) $(CFLAGS) -o main.o -c main.cpp
@@ -45,8 +45,8 @@ menu.o: menu.cpp menu.h escritor.cpp escritor.h lista.h lectura.cpp lectura.h fu
 funciones.o: funciones.cpp funciones.h
 	$(CC) $(CFLAGS) -o funciones.o -c funciones.cpp
 
-grafos.o: grafos.cpp grafos.h lectura.cpp lectura.h caminos.h lista.h
-	$(CC) $(CFLAGS) -o grafos.o -c grafos.cpp
+grafo.o: grafo.cpp grafo.h lectura.cpp lectura.h caminos.h lista.h
+	$(CC) $(CFLAGS) -o grafo.o -c grafo.cpp
 
 clear:	
 	rm *.o

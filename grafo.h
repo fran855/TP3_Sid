@@ -1,5 +1,5 @@
-#ifndef GRAFOS_H
-#define GRAFOS_H
+#ifndef GRAFO_H
+#define GRAFO_H
 
 #include <string>
 #include "lista.h"
@@ -16,7 +16,7 @@ private:
 
 /*MÉTODOS*/
 
-
+  
   //post libera la memoria de la matriz de adyacencia
   void liberar_matriz_adyacencia();
 
@@ -32,6 +32,10 @@ public:
   //Constructor
   Grafo(Lista<Lectura>* lista_lectura);
 
+  //Mostrar
+  //PRE: lista_lecturas no vacía
+  //POS: Muestra el grafo
+  void mostrar();
 
   // pre: lista_lecturas != null
   // pos: genera el grafo a partir de la lista

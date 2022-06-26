@@ -2,6 +2,7 @@
 #include "parser_lecturas.h"
 #include <fstream>
 #include <iostream>
+#include "grafo.h"
 #include "escritor.h"
 #include "lista.h"
 #include "menu.h"
@@ -19,7 +20,14 @@ int main(int argc, char * argv[]){
 	
   //Menu menu(lista_lecturas, lista_escritores);
   //menu.ejecutar_menu(cola_lecturas);
- 
+  
+  
+  Grafo grafo(lista_lecturas);
+  grafo.generar_grafo();
+  grafo.mostrar();
+
+
+
   delete lista_escritores;
   delete lista_lecturas;
   delete cola_lecturas;
