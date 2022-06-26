@@ -91,6 +91,12 @@ void Menu::ejecutar_menu(Cola<Lectura>* cola_lecturas)
             cout << endl;
             break;
 
+        case TIEMPO_MINIMO:
+            tiempo_minimo();
+            cout << RAYITAS << endl;
+            cout << endl;
+            break;
+
         case SALIR:
             return;
 
@@ -369,6 +375,26 @@ void Menu::crear_cola(Cola<Lectura>* cola_lecturas){
             cout << MSJ_MOSTRAR_COLA << endl;
             cola_lecturas -> consulta();
         }
+
+}
+
+void Menu::tiempo_minimo(){
+    Grafo* grafo = new Grafo(lista_lecturas);
+    Lista<Camino>* lista_caminos = grafo -> crear_lista_caminos();
+    Arbol<Lectura> arbol;
+    arbol.insertar(lista_caminos -> obtener_nodo(1) -> obtener_dato() -> obtener_origen());
+    arbol.insertar(lista_caminos -> obtener_nodo(1) -> obtener_dato() -> obtener_destino());
+
+    for(int i = 2; i <= lista_caminos -> obtener_cantidad(); i++){
+        Lectura* origen = lista_caminos -> obtener_nodo(i) -> obtener_dato() -> obtener_origen();
+        Lectura* destino = lista_caminos -> obtener_nodo(i) -> obtener_dato() -> obtener_origen();
+        if(arbol.esta(origen)){
+            arbol.insertar(origen);
+        }
+        if(arbol.esta(destino)){
+            arbol.insertar(destino);
+        }
+    }
 
 }
 

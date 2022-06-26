@@ -15,6 +15,9 @@
 #include "novela_historica.h"
 #include "genero.h"
 #include "hashing.h"
+#include "grafo.h"
+#include "arbol.h"
+#include "camino.h"
 
 using namespace std;
 
@@ -61,6 +64,7 @@ enum Opciones_menu {
     LISTAR_LECTURAS_ESCRITOR,
     LISTAR_NOVELAS_GENERO,
     CREAR_COLA,
+    TIEMPO_MINIMO,
     SALIR
 };
 
@@ -159,6 +163,11 @@ private:
     // PRE: -
     // POS: se crea una cola de lecturas
     void crear_cola(Cola<Lectura>* cola_lecturas);
+
+    // Tiempo mínimo
+    // PRE: -
+    // POS: se muestra el tiempo mínimo de lectura
+    void tiempo_minimo();
 };
 
 #endif
