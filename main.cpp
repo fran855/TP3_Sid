@@ -7,6 +7,7 @@
 #include "lista.h"
 #include "menu.h"
 #include "cola.h"
+#include "hashing.h"
 
 int main(int argc, char * argv[]){
   Lista<Escritor>* lista_escritores = new Lista<Escritor>;
@@ -22,11 +23,15 @@ int main(int argc, char * argv[]){
   //menu.ejecutar_menu(cola_lecturas);
   
   
-  Grafo grafo(lista_lecturas);
-  grafo.generar_grafo();
-  grafo.mostrar();
+  //Grafo grafo(lista_lecturas);
+  //grafo.generar_grafo();
+  //grafo.mostrar();
 
+  Hashing hashing(lista_escritores);
+  hashing.mostrar();
 
+  Menu menu(lista_lecturas, lista_escritores);
+  menu.ejecutar_menu(cola_lecturas);
 
   delete lista_escritores;
   delete lista_lecturas;

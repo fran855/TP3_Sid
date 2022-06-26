@@ -9,7 +9,7 @@ using namespace std;
 class Escritor{
     // Atributos
 private:
-    int id;
+    int isni;
     string nombre_apellido;
     string nacionalidad;
     short int anio_nacimiento;
@@ -23,17 +23,17 @@ public:
     // Constructor
     // PRE: nombre_apellido, nacionalidad strings no vacías, anio_nacimiento > 0, anio_fallecimiento > 0 o -1 si no se conoce
     // POS: construye un objeto del tipo Escritor con los parámetros ingresados.
-    Escritor(int id, string nombre_apellido, string nacionalidad, short int anio_nacimiento, short int anio_fallecimiento);
+    Escritor(int isni, string nombre_apellido, string nacionalidad, short int anio_nacimiento, short int anio_fallecimiento);
 
     // Mostrar
     // PRE: -
     // POS: muestra por pantalla los datos del escritor
     void mostrar();
 
-    // Obtener_id
+    // Obtener_isni
     // PRE: -
-    // POS: devuelve el ID del escritor
-    int obtener_id();
+    // POS: devuelve el isni del escritor
+    int obtener_isni();
 
     // Obtener_nombre_apellido
     // PRE: -

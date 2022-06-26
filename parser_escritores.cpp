@@ -10,7 +10,7 @@ Parser_escritores::Parser_escritores(Lista<Escritor> * lista, char ** argv){
 
 // Generar escritor anonimo
 void Parser_escritores::generar_anonimo(){
-    id = 0;
+    isni = 0;
     nombre_apellido = "ANONIMO";
     nacionalidad = "¿?";
     anio_nacimiento = -1;
@@ -27,7 +27,7 @@ void Parser_escritores::procesar_datos(){
     while(!archivo.eof()){
         getline(archivo, auxiliar);
       	auxiliar.replace(0, 1, " ");
-		id = stoi(auxiliar);
+		isni = stoi(auxiliar);
 		getline(archivo, nombre_apellido);
 		getline(archivo, nacionalidad);
 
@@ -46,7 +46,7 @@ void Parser_escritores::procesar_datos(){
             }
         }
 
-	    Escritor* nuevo_escritor = new Escritor(id, nombre_apellido, nacionalidad, anio_nacimiento, anio_fallecimiento);    
+	    Escritor* nuevo_escritor = new Escritor(isni, nombre_apellido, nacionalidad, anio_nacimiento, anio_fallecimiento);    
         lista_escritores -> alta(nuevo_escritor, i++);
     }
 

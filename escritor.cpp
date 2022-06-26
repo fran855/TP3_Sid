@@ -1,8 +1,8 @@
 #include "escritor.h"
 
 // Constructor de la clase Escritor
-Escritor::Escritor(int id, string nombre_apellido, string nacionalidad, short int anio_nacimiento, short int anio_fallecimiento){
-    this -> id = id;
+Escritor::Escritor(int isni, string nombre_apellido, string nacionalidad, short int anio_nacimiento, short int anio_fallecimiento){
+    this -> isni = isni;
     this -> nombre_apellido = nombre_apellido;
     this -> nacionalidad = nacionalidad;
     this -> anio_nacimiento = anio_nacimiento;
@@ -11,16 +11,16 @@ Escritor::Escritor(int id, string nombre_apellido, string nacionalidad, short in
 
 // Mostrar los datos del escritor
 void Escritor::mostrar(){
-    cout << "ID: " << id << endl;
+    cout << "ISNI: " << isni << endl;
     cout << "Nombre y apellido: "<< nombre_apellido << endl;
     cout << "Nacionalidad: " << nacionalidad << endl;
     cout << "Año de nacimiento: " << anio_nacimiento << endl;
     cout << "Año de fallecimiento: " << anio_fallecimiento << endl;
 }
 
-// Obtener el ID del escritor
-int Escritor::obtener_id(){
-    return id;
+// Obtener el isni del escritor
+int Escritor::obtener_isni(){
+    return isni;
 }
 
 // Obtener el nombre y apellido del escritor
@@ -59,7 +59,7 @@ Escritor::~Escritor(){
 
 // Sobrecarga del operador asignacion
 void Escritor::operator=(Escritor escritor2){
-	this -> id = escritor2.id;
+	this -> isni = escritor2.isni;
 	this -> nombre_apellido = escritor2.nombre_apellido;
     this -> nacionalidad = escritor2.nacionalidad;
 	this -> anio_nacimiento = escritor2.anio_nacimiento;

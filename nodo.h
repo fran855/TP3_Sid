@@ -18,6 +18,7 @@ public:
 	// POS: construye un nodo con d como dato y siguiente en nullptr
 	Nodo(Tipo* d);
 
+
 	// Cambiar siguiente
 	// PRE: n es un puntero válido
 	// POS: cambia el puntero siguiente por n
@@ -32,6 +33,11 @@ public:
 	// PRE: -
 	// POS: devuelve el puntero al siguiente nodo
 	Nodo<Tipo>* obtener_siguiente();
+
+	// Cambiar_dato
+	// PRE: -
+	// POS: cambia el dato del nodo por d
+	void cambiar_dato(Tipo* d);
 
 	// Destructor
 	// PRE: -
@@ -63,6 +69,11 @@ Tipo* Nodo<Tipo>::obtener_dato(){
 template <class Tipo>
 Nodo<Tipo>* Nodo<Tipo>::obtener_siguiente(){
 	return siguiente;
+}
+
+template <class Tipo>
+void Nodo<Tipo>::cambiar_dato(Tipo* d){
+	dato = d;
 }
 
 // Destructor

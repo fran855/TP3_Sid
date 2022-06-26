@@ -13,8 +13,8 @@ Escritor* Parser_lectura::obtener_autor(Lista<Escritor>* lista_escritores){
     return nullptr;
   }
   auxiliar.replace (0,  1, " ");
-  int id = stoi(auxiliar);
-  return lista_escritores -> consulta(id);
+  int isni = stoi(auxiliar);
+  return lista_escritores -> consulta(isni);
 }
 
 // Obtener puntero a lectura a partir de un string 

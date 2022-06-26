@@ -14,7 +14,7 @@ class Parser_escritores{
 private:
     string entrada;
     Lista<Escritor> * lista_escritores;
-    int id;
+    int isni;
     string nombre_apellido;
     string nacionalidad;
     short int anio_nacimiento;
