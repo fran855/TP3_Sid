@@ -7,14 +7,14 @@ Parser_lectura::Parser_lectura(char** argv) {
 }
 
 // Obtener puntero a autor a partir de una lista
-Escritor* Parser_lectura::obtener_autor(Lista<Escritor>* lista_escritores){
+Escritor* Parser_lectura::obtener_autor(Hashing* tabla){
   getline(archivo_lectura, auxiliar);
   if(auxiliar == "ANONIMO"){
     return nullptr;
   }
   auxiliar.replace (0,  1, " ");
   int isni = stoi(auxiliar);
-  return lista_escritores -> consulta(isni);
+  return tabla -> consulta(isni);
 }
 
 // Obtener puntero a lectura a partir de un string 
@@ -26,7 +26,7 @@ char* Parser_lectura::obtener_tema(string tema){
 }
 
 // Procesar datos. Lee el archivo y crea una lista de lecturas.
-void Parser_lectura:: procesar_datos(Lista<Escritor>* lista_escritores, Lista<Lectura>* lista_lecturas){
+void Parser_lectura:: procesar_datos(Hashing* tabla, Lista<Lectura>* lista_lecturas){
   Lectura* nueva_lectura;
   while(!archivo_lectura.eof()){
     getline(archivo_lectura, tipo_lectura);
@@ -38,7 +38,7 @@ void Parser_lectura:: procesar_datos(Lista<Escritor>* lista_escritores, Lista<Le
 
     if (tipo_lectura == "C"){
       getline(archivo_lectura, libro);
-      autor = obtener_autor(lista_escritores);
+      autor = obtener_autor(tabla);
       nueva_lectura = new Cuento('C', titulo, minutos, anio, libro, autor);
       lista_lecturas -> alta(nueva_lectura);
     }
@@ -49,11 +49,11 @@ void Parser_lectura:: procesar_datos(Lista<Escritor>* lista_escritores, Lista<Le
       if (genero == HISTORICA){
         getline(archivo_lectura, auxiliar);
         tema = obtener_tema(auxiliar);
-        autor = obtener_autor(lista_escritores);
+        autor = obtener_autor(tabla);
         nueva_lectura = new Novela_historica('H', titulo, minutos, anio, tema, autor);
         lista_lecturas -> alta(nueva_lectura);
       }else{
-        autor = obtener_autor(lista_escritores);
+        autor = obtener_autor(tabla);
         nueva_lectura = new Novela('N', titulo, minutos, anio, genero, autor);
         lista_lecturas -> alta(nueva_lectura);
       }
@@ -61,7 +61,7 @@ void Parser_lectura:: procesar_datos(Lista<Escritor>* lista_escritores, Lista<Le
     else if (tipo_lectura == "P") {
       getline(archivo_lectura, auxiliar);
       versos = stoi(auxiliar);
-      autor = obtener_autor(lista_escritores);
+      autor = obtener_autor(tabla);
       nueva_lectura = new Poema('P', titulo, minutos, anio, versos, autor);
       lista_lecturas -> alta(nueva_lectura);
     }

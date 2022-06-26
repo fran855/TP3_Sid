@@ -2,10 +2,10 @@
 
 using namespace std;
 
-Menu::Menu(Lista<Lectura> *lista_lecturas, Lista<Escritor> *lista_escritores)
+Menu::Menu(Lista<Lectura> *lista_lecturas, Hashing *tabla_escritores)
 {
     this->lista_lecturas = lista_lecturas;
-    this->lista_escritores = lista_escritores;
+    this->tabla_escritores = tabla_escritores;
     this -> cola_creada = false;
 
     srand(time(NULL)); // Inicializar semilla
@@ -101,28 +101,18 @@ void Menu::ejecutar_menu(Cola<Lectura>* cola_lecturas)
     } while (eleccion != SALIR);
 }
 
-Escritor* Menu::obtener_autor(Lista<Escritor> *lista_escritores)
+Escritor* Menu::obtener_autor(Hashing* tabla_escritores)
 {
     string nombre_apellido;
     cout << MSJ_INRGESAR_REFERENCIA_AUTOR << endl;
     getline(cin, nombre_apellido, '\n');
-    
+
     if (nombre_apellido == "ANONIMO")
     {
         return nullptr;
     }
 
-    Nodo<Escritor>* nodo_escritor = lista_escritores -> obtener_nodo(1);
-    while (nodo_escritor != NULL)
-    {
-        if (nodo_escritor->obtener_dato()->obtener_nombre_apellido() == nombre_apellido)
-        {
-            return nodo_escritor -> obtener_dato() -> obtener_direccion();
-        }
-        nodo_escritor = nodo_escritor->obtener_siguiente();
-    }
-
-    return nullptr; //si no lo encuentro es anonimo    
+    return tabla_escritores -> consulta(nombre_apellido);    
 }
 
 char* Menu::obtener_tema(string tema)
@@ -162,7 +152,7 @@ void Menu::nueva_lectura()
     {
         cout << MSJ_INGRESAR_LIBRO << endl;
         getline(cin, libro, '\n');
-        autor = obtener_autor(lista_escritores);
+        autor = obtener_autor(tabla_escritores);
         nueva_lectura = new Cuento('C', titulo, minutos, anio, libro, autor);
         lista_lecturas->alta(nueva_lectura);
     }
@@ -177,13 +167,13 @@ void Menu::nueva_lectura()
             cout << MSJ_INGRESAR_TEMA << endl;
             getline(cin, auxiliar, '\n');
             char* tema = obtener_tema(auxiliar);
-            autor = obtener_autor(lista_escritores);
+            autor = obtener_autor(tabla_escritores);
             nueva_lectura = new Novela_historica('H', titulo, minutos, anio, tema, autor);
             lista_lecturas->alta(nueva_lectura);
         }
         else
         {
-            autor = obtener_autor(lista_escritores);
+            autor = obtener_autor(tabla_escritores);
             nueva_lectura = new Novela('N', titulo, minutos, anio, genero, autor);
             lista_lecturas->alta(nueva_lectura);
         }
@@ -194,7 +184,7 @@ void Menu::nueva_lectura()
         int versos;        
         cin >> versos;
         getline(cin, auxiliar, '\n'); // Limpiar buffer
-        autor = obtener_autor(lista_escritores);
+        autor = obtener_autor(tabla_escritores);
         nueva_lectura = new Poema('P', titulo, minutos, anio, versos, autor);
         lista_lecturas->alta(nueva_lectura);
     }
@@ -219,10 +209,12 @@ void Menu::quitar_lectura()
 
 void Menu::agregar_escritor()
 {
-    int ultimo_id = lista_escritores->obtener_cantidad();
     string auxiliar, nombre_apellido, nacionalidad;
-    int anio_nacimiento, anio_fallecimiento;
+    int isni, anio_nacimiento, anio_fallecimiento;
 
+    cout << MSJ_INGRESAR_ISNI << endl;
+    cin >> isni;
+    getline(cin, auxiliar, '\n'); // Limpiar buffer
     cout << MSJ_INGRESAR_NOMBRE << endl;
     getline(cin, nombre_apellido, '\n');
     cout << MSJ_INGRESAR_NACIONALIDAD << endl;
@@ -232,8 +224,8 @@ void Menu::agregar_escritor()
     cout << MSJ_INGRESAR_FALLECIMIENTO << endl;
     cin >> anio_fallecimiento;
 
-    Escritor *nuevo_escritor = new Escritor(ultimo_id + 1, nombre_apellido, nacionalidad, anio_nacimiento, anio_fallecimiento);
-    lista_escritores->alta(nuevo_escritor, ultimo_id + 1);
+    Escritor *nuevo_escritor = new Escritor(isni, nombre_apellido, nacionalidad, anio_nacimiento, anio_fallecimiento);
+    tabla_escritores->alta(nuevo_escritor);
 }
 
 void Menu::cambiar_dato_escritor()
@@ -244,21 +236,18 @@ void Menu::cambiar_dato_escritor()
     getline(cin, referencia, '\n');
     cout << MSJ_ANIO_FALLECIMIENTO << endl;
     cin >> anio_fallecimiento_actualizado;
-    Nodo<Escritor> *nodo_escritor = lista_escritores->obtener_nodo(1);
+    Escritor *escritor = tabla_escritores-> consulta(referencia);
 
-    while (nodo_escritor->obtener_siguiente() != NULL)
-    {
-        if (nodo_escritor->obtener_dato()->obtener_nombre_apellido() == referencia)
-        {
-            nodo_escritor->obtener_dato()->cambiar_fallecimiento(anio_fallecimiento_actualizado);
-        }
-        nodo_escritor = nodo_escritor->obtener_siguiente();
+    if(escritor != nullptr){
+        escritor -> cambiar_fallecimiento(anio_fallecimiento_actualizado);
+
     }
+
 }
 
 void Menu::listar_escritores()
 {
-    lista_escritores->mostrar();
+    tabla_escritores->mostrar();
 }
 
 void Menu::mostrar_lectura_random()

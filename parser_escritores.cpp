@@ -3,9 +3,9 @@
 using namespace std;
 
 // Constructor
-Parser_escritores::Parser_escritores(Lista<Escritor> * lista, char ** argv){
+Parser_escritores::Parser_escritores(Hashing * tabla, char ** argv){
     entrada = argv[1];
-    lista_escritores = lista;
+    this -> tabla = tabla;
 }
 
 // Generar escritor anonimo
@@ -22,7 +22,6 @@ void Parser_escritores::procesar_datos(){
     ifstream archivo(entrada);
 	
     string auxiliar;
-    int i = 1;
 
     while(!archivo.eof()){
         getline(archivo, auxiliar);
@@ -47,7 +46,7 @@ void Parser_escritores::procesar_datos(){
         }
 
 	    Escritor* nuevo_escritor = new Escritor(isni, nombre_apellido, nacionalidad, anio_nacimiento, anio_fallecimiento);    
-        lista_escritores -> alta(nuevo_escritor, i++);
+        tabla -> alta(nuevo_escritor);
     }
 
     return;

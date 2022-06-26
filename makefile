@@ -1,4 +1,4 @@
-CFLAGS =
+CFLAGS = -g
 CC = g++
 
 all: sid clear

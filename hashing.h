@@ -12,13 +12,16 @@ class Hashing{
 private:
     Lista<Escritor>** tabla;
     int n;
+    int* ocupados;
+    int n_ocupados;
 
 public:
     Hashing();
-    Hashing(Lista<Escritor>* lista_escritores);
+    //Hashing(Lista<Escritor>* lista_escritores);
     ~Hashing();
     void alta(Escritor* escritor);
     Escritor* consulta(int isni);
+    Escritor* consulta(string nombre_apellido);
     void baja(int isni);
 	void mostrar();
 };

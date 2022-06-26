@@ -10,30 +10,26 @@
 #include "hashing.h"
 
 int main(int argc, char * argv[]){
-  Lista<Escritor>* lista_escritores = new Lista<Escritor>;
 	Lista<Lectura>* lista_lecturas = new Lista<Lectura>;
   Cola<Lectura>* cola_lecturas = new Cola<Lectura>;
+  Hashing* tabla_escritores = new Hashing;
   
-  Parser_escritores parser_escritores(lista_escritores, argv);
+  Parser_escritores parser_escritores(tabla_escritores, argv);
 	parser_escritores.procesar_datos();
   Parser_lectura parser_lecturas(argv);
-  parser_lecturas.procesar_datos(lista_escritores, lista_lecturas);
-	
-  //Menu menu(lista_lecturas, lista_escritores);
-  //menu.ejecutar_menu(cola_lecturas);
+  parser_lecturas.procesar_datos(tabla_escritores, lista_lecturas);
   
   
   //Grafo grafo(lista_lecturas);
   //grafo.generar_grafo();
   //grafo.mostrar();
 
-  Hashing hashing(lista_escritores);
-  hashing.mostrar();
+  //tabla_escritores -> mostrar();
 
-  Menu menu(lista_lecturas, lista_escritores);
+  Menu menu(lista_lecturas, tabla_escritores);
   menu.ejecutar_menu(cola_lecturas);
 
-  delete lista_escritores;
+  delete tabla_escritores;
   delete lista_lecturas;
   delete cola_lecturas;
 

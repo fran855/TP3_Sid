@@ -104,7 +104,6 @@ Cola<Tipo>::~Cola(){
 template <class Tipo>  
 void Cola<Tipo>::encolar(Lista<Tipo>* lista){
   Nodo<Tipo>* minimo = nullptr;
-  unsigned int minutos_anterior = 0;
 
   for (int i = 1; i <= lista -> obtener_cantidad(); i++){
     minimo = lista -> encontrar_minimo(minimo);

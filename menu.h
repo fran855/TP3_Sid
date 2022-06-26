@@ -14,6 +14,7 @@
 #include "novela.h"
 #include "novela_historica.h"
 #include "genero.h"
+#include "hashing.h"
 
 using namespace std;
 
@@ -26,6 +27,7 @@ const string MSJ_INGRESAR_GENERO = "Ingrese el genero:";
 const string MSJ_INGRESAR_VERSOS = "Ingrese la cantidad de versos:";
 const string MSJ_INGRESAR_MINUTOS = "Ingrese los minutos estimados de lectura";
 const string MSJ_INGRESAR_ANIO = "Ingrese el año de publicacion de la obra:";
+const string MSJ_INGRESAR_ISNI = "Ingrese el ISNI:";
 const string MSJ_INRGESAR_INFO_LECTURA = "Ingrese la informacion correspondiente segun\nSi es novela, va el género\nSi es novela histórica, va el tema\nSi es cuento, va el título del libro en donde está publicado\nSi es un poema, va la cantidad de versos";
 const string MSJ_INRGESAR_REFERENCIA_AUTOR = "Ingrese el nombre y apellido del autor correspondiente:";
 const string MSJ_BAJA_LISTA = "Ingrese el nombre de la lectura que quiere quitar:";
@@ -65,16 +67,16 @@ enum Opciones_menu {
 class Menu {
 private:
     int eleccion;
-    Lista<Escritor>* lista_escritores;
+    Hashing* tabla_escritores;
     Lista<Lectura>* lista_lecturas;
     Cola<Lectura>* cola_lecturas;
     bool cola_creada;
 
 public:
     // Constructor por defecto
-    // PRE: lista_lectura y lista_escritores son punteros a listas válidas
+    // PRE: lista_lectura y tabla_escritores son punteros válidos
     // POS: se crea un objeto de tipo Menu
-    Menu(Lista<Lectura>* lista_lecturas, Lista<Escritor>* lista_escritores);
+    Menu(Lista<Lectura>* lista_lecturas, Hashing* tabla_escritores);
 
     // Destructor por defecto
     // PRE: -
@@ -94,9 +96,9 @@ private:
     Escritor* encontrar_escritor_nombre(string nombre_apellido);
     
     // Obtener el puntero al escritor en la lista de escritores
-    // PRE: lista_escritores puntero a lista válido
+    // PRE: tabla_escritores puntero a tabla de hashing válido
     // POS: devuelve un puntero al escritor
-    Escritor* obtener_autor(Lista<Escritor>* lista_escritores);
+    Escritor* obtener_autor(Hashing* tabla_escritores);
     
     // Obtener tema
     // PRE: tema cadena válida

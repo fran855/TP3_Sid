@@ -7,6 +7,7 @@
 #include "novela_historica.h"
 #include "cuento.h"
 #include "poema.h"
+#include "hashing.h"
 #include <fstream>
 #include <string>
 
@@ -41,7 +42,7 @@ public:
     //Procesar datos
     //PRE: lista_escritores y lista_lecturas deben ser punteros validos
     //POS: -
-    void procesar_datos(Lista<Escritor>* lista_escritores, Lista<Lectura>* lista_lecturas);
+    void procesar_datos(Hashing* tabla, Lista<Lectura>* lista_lecturas);
 
     //Destructor
     //PRE: -
@@ -52,7 +53,7 @@ private:
     // Obtener autor
     // PRE: lista_escritores debe ser un puntero valido
     // POS: devuelve un puntero a un escritor
-    Escritor* obtener_autor(Lista<Escritor>* lista_escritores);
+    Escritor* obtener_autor(Hashing* tabla);
 
     // Obtener tema
     // PRE: tema debe ser un string no vacio

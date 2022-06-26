@@ -6,6 +6,7 @@
 #include <iostream>
 #include "escritor.h"
 #include "lista.h"
+#include "hashing.h"
 
 using namespace std;
 
@@ -13,7 +14,7 @@ class Parser_escritores{
     // Atributos
 private:
     string entrada;
-    Lista<Escritor> * lista_escritores;
+    Hashing * tabla;
     int isni;
     string nombre_apellido;
     string nacionalidad;
@@ -25,7 +26,7 @@ public:
     // Constructor
     // PRE: lista puntero valido, argv puntero valido
     // POS: -
-    Parser_escritores(Lista<Escritor> * lista, char ** argv);
+    Parser_escritores(Hashing * tabla, char ** argv);
     
     // Destructor
     // PRE: -
