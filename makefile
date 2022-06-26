@@ -3,8 +3,8 @@ CC = g++
 
 all: sid clear
 
-sid: main.cpp menu.o lectura.o escritor.o parser_escritores.o parser_lecturas.o novela.o novela_historica.o cuento.o genero.o poema.o funciones.o grafo.o hashing.o
-	$(CC) $(CFLAGS) main.cpp -o sid menu.o lectura.o escritor.o parser_escritores.o parser_lecturas.o novela.o novela_historica.o cuento.o genero.o poema.o funciones.o grafo.o hashing.o
+sid: main.cpp menu.o lectura.o escritor.o parser_escritores.o parser_lecturas.o novela.o novela_historica.o cuento.o genero.o poema.o funciones.o grafo.o hashing.o camino.o
+	$(CC) $(CFLAGS) main.cpp -o sid menu.o lectura.o escritor.o parser_escritores.o parser_lecturas.o novela.o novela_historica.o cuento.o genero.o poema.o funciones.o grafo.o hashing.o camino.o
 
 lectura.o: lectura.cpp lectura.h genero.h
 	$(CC) $(CFLAGS) -o lectura.o -c lectura.cpp
@@ -39,11 +39,14 @@ menu.o: menu.cpp menu.h escritor.cpp escritor.h lista.h lectura.cpp lectura.h fu
 funciones.o: funciones.cpp funciones.h
 	$(CC) $(CFLAGS) -o funciones.o -c funciones.cpp
 
-grafo.o: grafo.cpp grafo.h lectura.cpp lectura.h caminos.h lista.h
+grafo.o: grafo.cpp grafo.h lectura.cpp lectura.h pesos.h lista.h
 	$(CC) $(CFLAGS) -o grafo.o -c grafo.cpp
 
 hashing.o: hashing.cpp hashing.h lista.h escritor.h escritor.cpp nodo.h
 	$(CC) $(CFLAGS) -o hashing.o -c hashing.cpp
+
+camino.o: camino.cpp camino.h lista.h lectura.h
+	$(CC) $(CFLAGS) -o camino.o -c camino.cpp
 
 clear:	
 	rm *.o

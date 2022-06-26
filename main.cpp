@@ -20,14 +20,16 @@ int main(int argc, char * argv[]){
   parser_lecturas.procesar_datos(tabla_escritores, lista_lecturas);
   
   
-  //Grafo grafo(lista_lecturas);
-  //grafo.generar_grafo();
+  Grafo grafo(lista_lecturas);
+  grafo.generar_grafo();
+  Lista<Camino>* lista_caminos = grafo.crear_lista_caminos();
+  grafo.mostrar_lista_caminos(lista_caminos);
   //grafo.mostrar();
 
   //tabla_escritores -> mostrar();
 
-  Menu menu(lista_lecturas, tabla_escritores);
-  menu.ejecutar_menu(cola_lecturas);
+  //Menu menu(lista_lecturas, tabla_escritores);
+  //menu.ejecutar_menu(cola_lecturas);
 
   delete tabla_escritores;
   delete lista_lecturas;

@@ -3,7 +3,8 @@
 
 #include <string>
 #include "lista.h"
-#include "caminos.h"
+#include "pesos.h"
+#include "camino.h"
 
 using namespace std;
 
@@ -37,9 +38,17 @@ public:
   //POS: Muestra el grafo
   void mostrar();
 
-  // pre: lista_lecturas != null
-  // pos: genera el grafo a partir de la lista
+  //PRE: lista_lecturas != null
+  //POS: genera el grafo a partir de la lista
   void generar_grafo();
+
+  //PRE: grafo ya cargado
+  //POS: devuelve una lista de caminos (ordenados por peso) que se pueden recorrer
+  Lista<Camino>* crear_lista_caminos();
+
+  //PRE: lista_caminos != null
+  //POS: muestra la lista de caminos
+  void mostrar_lista_caminos(Lista<Camino>* lista_caminos);
 
   //Destructor
   ~Grafo();
