@@ -91,14 +91,103 @@ void Grafo::generar_grafo(){
 }
 
 
-
-
 void Grafo::liberar_matriz_adyacencia() {
     for(int i = 0; i < lista_lecturas -> obtener_cantidad(); i++){
         delete[] matriz_adyacencia[i];
     }
     delete[] matriz_adyacencia;
 }
+
+
+int Grafo::llave_minima(int llaves[], bool aem_lecturas[])
+{
+	int minimo = INFINITO;
+	int indice_minimo;
+
+	for (int i = 0; i < lista_lecturas -> obtener_cantidad(); i++)
+	{
+		// chequeo si el elemento ya esta en el AEM y si la llave
+		// es mas pequeña que el minimo, entonces ese el el nuevo minimo
+		if (aem_lecturas[i] == false && llaves[i] < minimo)
+		{
+			minimo = llaves[i];
+			indice_minimo = i;
+		}
+	}
+	return indice_minimo;
+};
+
+
+
+void Grafo::prim_aem()
+{
+	// arreglo que contiene al arbol de expansion minima (AEM)
+	int* arbol_expansion_minima = new int[lista_lecturas -> obtener_cantidad()];
+
+	// valores de pesos que uso para elegir el minimo
+	int* llaves = new int[lista_lecturas -> obtener_cantidad()];
+
+	// arreglo para ver si la lectura se encuentra en el AEM
+	bool* aem_lecturas = new bool[lista_lecturas -> obtener_cantidad()];
+
+	// inicializamos las llaves en infinito (valor muy grande,
+	// teoricamente podria ser mas grande que la siesta mayor)
+	// y las lecturas del AEM en false.
+	for (int i = 0; i < lista_lecturas -> obtener_cantidad(); i++)
+	{
+		llaves[i] = INFINITO;
+		aem_lecturas[i] = false;
+	}
+
+	// vamos a empezar por la primer lectura, para esto pongo la llave[0]
+	// en 0 para que se elija primero. 
+	llaves[0] = 0;
+	arbol_expansion_minima[0] = -1;
+	
+	for (int i = 0; i < lista_lecturas -> obtener_cantidad() - 1; i++)
+	{
+		// obtengo el indice de la llave minima
+		int u = llave_minima(llaves, aem_lecturas);
+
+		aem_lecturas[i] = true;
+
+		// ahora tengo que actualizar las llaves de las lecturas adyacentes
+		// al minimo encontrado, solo considerando los vertices que no estan
+		// en el AEM
+		for (int v = 0; v < lista_lecturas -> obtener_cantidad(); v++)
+		{	
+			// chequeo:
+			//	- no sea de la diagonal (-1)
+			//	- que no pertenezca al AEM
+			//	- que el peso del camino sea menor a la llave ubicada previamente
+			if (matriz_adyacencia[u][v] != -1 && aem_lecturas[v] == false && matriz_adyacencia[u][v] < llaves[v])
+			{
+				arbol_expansion_minima[v] = u;
+				llaves[v] = matriz_adyacencia[u][v];
+			}
+		}
+	}
+	imprimir_aem(arbol_expansion_minima);
+};
+
+
+void Grafo::imprimir_aem(int* arbol_expansion_minima)
+{
+	cout << "Camino \tTiempo de siesta" << endl;
+
+	for (int i = 0; i < lista_lecturas -> obtener_cantidad(); i++)
+	{
+		cout << arbol_expansion_minima[i] << "-\t" << i << matriz_adyacencia[i][arbol_expansion_minima[i]] << endl;
+	}
+	
+};
+
+void Grafo::arbol_expansion_minima()
+{
+	prim_aem();
+};
+
+
 
 
 Grafo::~Grafo() {

@@ -7,16 +7,19 @@
 
 using namespace std;
 
+const int INFINITO = 999999;
+
 class Grafo {
-/*ATRIBUTOS*/
+
 private:
+
+/*ATRIBUTOS*/
+
   int ** matriz_adyacencia;
   Lista<Lectura> * lista_lecturas;
 
-
 /*MÉTODOS*/
 
-  
   //post libera la memoria de la matriz de adyacencia
   void liberar_matriz_adyacencia();
 
@@ -27,6 +30,17 @@ private:
   //pre: lecturas dentro de la lista de lecturas
   //pos: genera camino entre las dos lecturas
   void procesar_datos(Lectura* origen, Lectura* destino);
+
+  // pre: llaves y aem_lecturas deben ser arreglos inicializados
+  // pos: devuelve la llave minima de una lectura que no se encuentra en el AEM 
+  int llave_minima(int llaves[], bool aem_lecturas[]);
+
+  // pre: -
+  // pos: construye el arbol de expansion minima a partir del grafo
+  //      utilizando el algoritmo de Prim
+  void prim_aem();
+
+  void imprimir_aem(int* arbol_expansion_minima);
 
 public:
   //Constructor
@@ -40,6 +54,10 @@ public:
   // pre: lista_lecturas != null
   // pos: genera el grafo a partir de la lista
   void generar_grafo();
+
+  // pre: -
+  // pos: imprime el arbol de expansion minima
+  void arbol_expansion_minima();
 
   //Destructor
   ~Grafo();
