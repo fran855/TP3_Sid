@@ -169,6 +169,9 @@ void Grafo::prim_aem()
 		}
 	}
 	imprimir_aem(arbol_expansion_minima);
+	delete[] arbol_expansion_minima;
+	delete[] llaves;
+	delete[] aem_lecturas;
 };
 
 
@@ -187,7 +190,6 @@ void Grafo::arbol_expansion_minima()
 {
 	prim_aem();
 };
-
 
 
 

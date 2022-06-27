@@ -58,7 +58,7 @@ public:
   // pre: -
   // pos: imprime el arbol de expansion minima
   void arbol_expansion_minima();
-
+  
   //Destructor
   ~Grafo();
 };
