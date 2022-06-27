@@ -23,11 +23,13 @@ int main(int argc, char * argv[]){
   Grafo grafo(lista_lecturas);
   grafo.generar_grafo();
   grafo.mostrar();
+  
+  // lista_lecturas -> mostrar();
 
   grafo.arbol_expansion_minima();
 
-  // tabla_escritores -> mostrar();
 
+  // tabla_escritores -> mostrar();
 /*   Menu menu(lista_lecturas, tabla_escritores);
   menu.ejecutar_menu(cola_lecturas);
  */

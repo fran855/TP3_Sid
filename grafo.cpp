@@ -99,7 +99,7 @@ void Grafo::liberar_matriz_adyacencia() {
 }
 
 
-int Grafo::llave_minima(int llaves[], bool aem_lecturas[])
+int Grafo::llave_minima(int* llaves, bool* aem_lecturas)
 {
 	int minimo = INFINITO;
 	int indice_minimo;
@@ -141,6 +141,7 @@ void Grafo::prim_aem()
 
 	// vamos a empezar por la primer lectura, para esto pongo la llave[0]
 	// en 0 para que se elija primero. 
+	// aem[0] = -1 porque el 0 no tiene ningun padre
 	llaves[0] = 0;
 	arbol_expansion_minima[0] = -1;
 	
@@ -149,7 +150,7 @@ void Grafo::prim_aem()
 		// obtengo el indice de la llave minima
 		int u = llave_minima(llaves, aem_lecturas);
 
-		aem_lecturas[i] = true;
+		aem_lecturas[u] = true;
 
 		// ahora tengo que actualizar las llaves de las lecturas adyacentes
 		// al minimo encontrado, solo considerando los vertices que no estan
@@ -173,11 +174,11 @@ void Grafo::prim_aem()
 
 void Grafo::imprimir_aem(int* arbol_expansion_minima)
 {
-	cout << "Camino \tTiempo de siesta" << endl;
+	cout << "Camino\tTiempo de siesta" << endl;
 
 	for (int i = 0; i < lista_lecturas -> obtener_cantidad(); i++)
 	{
-		cout << arbol_expansion_minima[i] << "-\t" << i << matriz_adyacencia[i][arbol_expansion_minima[i]] << endl;
+		cout << arbol_expansion_minima[i] << " - " << i << "\t\t" << matriz_adyacencia[i][arbol_expansion_minima[i]] << endl;
 	}
 	
 };

@@ -33,7 +33,7 @@ private:
 
   // pre: llaves y aem_lecturas deben ser arreglos inicializados
   // pos: devuelve la llave minima de una lectura que no se encuentra en el AEM 
-  int llave_minima(int llaves[], bool aem_lecturas[]);
+  int llave_minima(int* llaves, bool* aem_lecturas);
 
   // pre: -
   // pos: construye el arbol de expansion minima a partir del grafo
