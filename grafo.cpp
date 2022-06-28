@@ -169,10 +169,38 @@ void Grafo::prim_aem()
 		}
 	}
 	imprimir_aem(arbol_expansion_minima);
+	// lista_lecturas -> mostrar();
+	mostrar_orden_aem(arbol_expansion_minima);
+
+
+
+	// libero memoria
 	delete[] arbol_expansion_minima;
 	delete[] llaves;
 	delete[] aem_lecturas;
 };
+
+int Grafo::tiempo_max_lectura(int** arbol_expansion_minima)
+{
+	int tiempo_maximo = 0;
+
+	// acumulo los tiempos de siestas entre lecturas
+	for (int i = 0; i < lista_lecturas -> obtener_cantidad(); i++)
+	{
+		tiempo_maximo += matriz_adyacencia[i][(*arbol_expansion_minima)[i]];
+	}
+
+	Nodo<Lectura>* actual = lista_lecturas -> obtener_nodo(1);
+
+	while (actual != nullptr)
+	{
+		tiempo_maximo += actual -> obtener_dato() -> obtener_minutos();
+		actual = actual -> obtener_siguiente();
+	}
+	
+	return tiempo_maximo;
+};
+
 
 
 void Grafo::imprimir_aem(int* arbol_expansion_minima)
@@ -183,12 +211,70 @@ void Grafo::imprimir_aem(int* arbol_expansion_minima)
 	{
 		cout << arbol_expansion_minima[i] << " - " << i << "\t\t" << matriz_adyacencia[i][arbol_expansion_minima[i]] << endl;
 	}
-	
+
+	cout << "El tiempo máximo de lectura es: " << tiempo_max_lectura(&arbol_expansion_minima) << endl;
+	cout << "El orden recomendado de lectura es el siguiente:" << endl;
 };
 
 void Grafo::arbol_expansion_minima()
 {
 	prim_aem();
+};
+
+// devuelve false si todavia hay lecturas por visitar
+//			true si ya fueron todos visitados
+bool Grafo::todos_visitados(bool* visitados)
+{
+	for (int i = 0; i < lista_lecturas -> obtener_cantidad(); i++)
+	{
+		if (visitados[i] == false)
+			return false;
+	}
+	return true;	
+};
+
+
+void Grafo::mostrar_orden_aem(int* arbol_expansion_minima)
+{
+	// arreglo que me guarde el estado de los nodos
+	bool* visitados = new bool[lista_lecturas -> obtener_cantidad()];
+
+	// me creo una cola usando stl para guardar las lecturas a las que tengo que
+	// chequear la adyacencia
+	list<int> cola;
+
+	// inicializo el arreglo
+	for (int i = 0; i < lista_lecturas -> obtener_cantidad(); i++)
+	{
+		visitados[i] = false;
+	};
+
+	// empiezo por la priemra lectura de la lista
+	visitados[0] = true;
+	cout << lista_lecturas -> consulta(1) -> obtener_titulo() << endl;	// imprimo la primera lectura
+
+	cola.push_back(0);	// le enchufo el 0 a la cola
+
+	while (todos_visitados(visitados) != true)
+	{
+		int actual = cola.front();
+
+		//ciclo que recorre el arbol para ver quien tiene de padre a la lectura /actual/
+		for (int indice_arbol = 0; indice_arbol < lista_lecturas -> obtener_cantidad(); indice_arbol++)
+		{
+			// condicion que chequea si la lectura fue visitada y si tiene de padre a /indice lectura/
+			if (arbol_expansion_minima[indice_arbol] == actual && visitados[indice_arbol] == false)
+			{
+				cola.push_back(indice_arbol);	// encola el adyacente encontrado
+				visitados[indice_arbol] = true;	// me marca como visitado al adyacente
+				string titulo = lista_lecturas -> consulta(indice_arbol + 1) -> obtener_titulo();
+				cout << titulo << endl;
+			}
+		}
+
+		cola.pop_front();	
+	}
+	delete[] visitados;
 };
 
 

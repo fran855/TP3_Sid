@@ -1,9 +1,12 @@
 #ifndef GRAFO_H
 #define GRAFO_H
 
+#include <list>
 #include <string>
 #include "lista.h"
 #include "caminos.h"
+#include "cola.h"
+#include "nodo.h"
 
 using namespace std;
 
@@ -35,12 +38,18 @@ private:
   // pos: devuelve la llave minima de una lectura que no se encuentra en el AEM 
   int llave_minima(int* llaves, bool* aem_lecturas);
 
+  int tiempo_max_lectura(int** arbol_expansion_minima);
+
   // pre: -
   // pos: construye el arbol de expansion minima a partir del grafo
   //      utilizando el algoritmo de Prim
   void prim_aem();
 
   void imprimir_aem(int* arbol_expansion_minima);
+
+  void mostrar_orden_aem(int* arbol_expansion_minima);
+
+  bool todos_visitados(bool* visitados);
 
 public:
   //Constructor
