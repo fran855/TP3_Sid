@@ -35,12 +35,12 @@ void Parser_escritores::procesar_datos(){
             anio_nacimiento = -1;
             anio_fallecimiento = -1;
         } else{
-            anio_nacimiento = stoi(auxiliar);
+            anio_nacimiento = (short int)stoi(auxiliar);
             getline(archivo, auxiliar);
             if(auxiliar.empty()){
                 anio_fallecimiento = -1;
             } else{
-                anio_fallecimiento = stoi(auxiliar);
+                anio_fallecimiento = (short int)stoi(auxiliar);
 		        getline(archivo, auxiliar); //Apunta al nuevo escritor (o lee el EOF)     
             }
         }

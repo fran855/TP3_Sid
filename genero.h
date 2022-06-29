@@ -2,7 +2,6 @@
 #define GENERO_H_INCLUDED
 
 #include <string>
-#include "funciones.h"
 
 using namespace std;
 

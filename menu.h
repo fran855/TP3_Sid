@@ -8,7 +8,6 @@
 #include "escritor.h"
 #include "lectura.h"
 #include "cola.h"
-#include "funciones.h"
 #include "cuento.h"
 #include "poema.h"
 #include "novela.h"

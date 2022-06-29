@@ -8,7 +8,7 @@ Menu::Menu(Lista<Lectura> *lista_lecturas, Hashing *tabla_escritores)
     this->tabla_escritores = tabla_escritores;
     this->cola_creada = false;
 
-    srand(time(NULL)); // Inicializar semilla
+    srand((unsigned int)time(NULL)); // Inicializar semilla
 }
 
 void Menu::ejecutar_menu(Cola<Lectura> *cola_lecturas)
@@ -149,7 +149,7 @@ void Menu::nueva_lectura()
 
     cout << MSJ_INGRESAR_TIPO_LECTURA << endl;
     cin >> tipo_lectura;
-    tipo_lectura = tolower(tipo_lectura);
+    tipo_lectura = (char)tolower(tipo_lectura);
     getline(cin, auxiliar, '\n'); // Limpiar buffer
 
     cout << MSJ_INGRESAR_TITULO << endl;
@@ -225,7 +225,8 @@ void Menu::quitar_lectura()
 void Menu::agregar_escritor()
 {
     string auxiliar, nombre_apellido, nacionalidad;
-    int isni, anio_nacimiento, anio_fallecimiento;
+    int isni;
+    short int anio_nacimiento, anio_fallecimiento;
 
     cout << MSJ_INGRESAR_ISNI << endl;
     cin >> isni;
@@ -245,7 +246,7 @@ void Menu::agregar_escritor()
 
 void Menu::cambiar_dato_escritor()
 {
-    int anio_fallecimiento_actualizado;
+    short int anio_fallecimiento_actualizado;
     string referencia;
     cout << MSJ_ESCRITOR_FALLECIMIENTO << endl;
     getline(cin, referencia, '\n');
@@ -307,7 +308,7 @@ void Menu::listar_lecturas_escritor()
     cout << endl;
     Nodo<Lectura> *nodo_actual = lista_lecturas->obtener_nodo(1);
 
-    if (son_iguales(nombre_apellido, "ANONIMO"))
+    if (nombre_apellido == "ANONIMO")
     {
         while (nodo_actual->obtener_siguiente() != NULL)
         {
@@ -324,7 +325,7 @@ void Menu::listar_lecturas_escritor()
         {
             if (nodo_actual->obtener_dato()->obtener_autor() != NULL)
             {
-                if (son_iguales(nodo_actual->obtener_dato()->obtener_autor()->obtener_nombre_apellido(), nombre_apellido))
+                if (nodo_actual->obtener_dato()->obtener_autor()->obtener_nombre_apellido() == nombre_apellido)
                 {
                     nodo_actual->obtener_dato()->mostrar();
                     cout << endl;
@@ -369,7 +370,7 @@ void Menu::crear_cola(Cola<Lectura> *cola_lecturas)
     cin >> fue_leido;
     getline(cin, auxiliar, '\n'); // Limpiar buffer
 
-    fue_leido = tolower(fue_leido);
+    fue_leido = (char)tolower(fue_leido);
 
     if (fue_leido == 's')
     {
