@@ -18,7 +18,7 @@
 
 using namespace std;
 
-const string MSJ_CABECERA_MENU = "Bienvenido al club de lectura de Sid!\nIngresa a continuacion la opcion deseada:\n\n1. Agregar una lectura a la lista.\n2. Quitar una lectura de la lista.\n3. Agregar un escritor.\n4. Cambiar fecha de fallecimiento de un autor.\n5. Listar los escritores.\n6. Mostrar una lectura random!\n7. Mostrar todas las lecturas.\n8. Mostrar lecturas en un periodo de años.\n9. Mostrar lecturas segun autor.\n10. Mostrar novelas segun genero.\n11. Mostrar el próximo elemento de menor cantidad de minutos sin  leer.\n12. Mostrar el tiempo mínimo de lectura.\n13. Salir del club de lectura.";
+const string MSJ_CABECERA_MENU = "Bienvenido al club de lectura de Sid!\nIngresa a continuacion la opcion deseada:\n\n1.\tAgregar una lectura a la lista.\n2.\tQuitar una lectura de la lista.\n3.\tAgregar un escritor.\n4.\tCambiar fecha de fallecimiento de un autor.\n5.\tListar los escritores.\n6.\tMostrar una lectura random!\n7.\tMostrar todas las lecturas.\n8.\tMostrar lecturas en un periodo de años.\n9.\tMostrar lecturas segun autor.\n10.\tMostrar novelas segun genero.\n11.\tMostrar el próximo elemento de menor cantidad de minutos sin  leer.\n12.\tMostrar el tiempo mínimo de lectura.\n13.\tSalir del club de lectura.";
 const string MSJ_INGRESAR_TIPO_LECTURA = "Ingrese N (Novela), C (Cuento) o P (Poeta):";
 const string MSJ_INGRESAR_TITULO = "Ingrese el titulo de la obra:";
 const string MSJ_INGRESAR_LIBRO = "Ingrese el libro:";

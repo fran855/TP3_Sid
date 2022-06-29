@@ -98,6 +98,7 @@ void Menu::ejecutar_menu(Cola<Lectura> *cola_lecturas)
             break;
 
         case SALIR:
+            cout << MSJ_SALIDA << endl;
             return;
 
         default:

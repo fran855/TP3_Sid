@@ -20,6 +20,7 @@ private:
 
   int ** matriz_adyacencia;
   Lista<Lectura> * lista_lecturas;
+  int n_elementos;
 
 /*MÉTODOS*/
 

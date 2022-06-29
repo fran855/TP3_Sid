@@ -19,9 +19,14 @@ int main(int argc, char * argv[]){
   Parser_lectura parser_lecturas(argv);
   parser_lecturas.procesar_datos(tabla_escritores, lista_lecturas);
   
-  Menu menu(lista_lecturas, tabla_escritores);
+  //Menu menu(lista_lecturas, tabla_escritores);
    
-  menu.ejecutar_menu(cola_lecturas);
+  //menu.ejecutar_menu(cola_lecturas);
+
+
+  Grafo grafo(lista_lecturas);
+  grafo.generar_grafo();
+  //grafo.arbol_expansion_minima();
 
   delete tabla_escritores;
   delete lista_lecturas;
