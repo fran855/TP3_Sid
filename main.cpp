@@ -9,24 +9,19 @@
 #include "cola.h"
 #include "hashing.h"
 
-int main(int argc, char * argv[]){
-	Lista<Lectura>* lista_lecturas = new Lista<Lectura>;
-  Cola<Lectura>* cola_lecturas = new Cola<Lectura>;
-  Hashing* tabla_escritores = new Hashing;
-  
+int main(int argc, char *argv[])
+{
+  Lista<Lectura> *lista_lecturas = new Lista<Lectura>;
+  Cola<Lectura> *cola_lecturas = new Cola<Lectura>;
+  Hashing *tabla_escritores = new Hashing;
+
   Parser_escritores parser_escritores(tabla_escritores, argv);
-	parser_escritores.procesar_datos();
+  parser_escritores.procesar_datos();
   Parser_lectura parser_lecturas(argv);
   parser_lecturas.procesar_datos(tabla_escritores, lista_lecturas);
-  
-  //Menu menu(lista_lecturas, tabla_escritores);
-   
-  //menu.ejecutar_menu(cola_lecturas);
 
-
-  Grafo grafo(lista_lecturas);
-  grafo.generar_grafo();
-  //grafo.arbol_expansion_minima();
+  Menu menu(lista_lecturas, tabla_escritores);
+  menu.ejecutar_menu(cola_lecturas);
 
   delete tabla_escritores;
   delete lista_lecturas;
