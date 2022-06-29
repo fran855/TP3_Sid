@@ -205,13 +205,14 @@ int Grafo::tiempo_max_lectura(int** arbol_expansion_minima)
 
 void Grafo::imprimir_aem(int* arbol_expansion_minima)
 {
+	/*
 	cout << "Camino\tTiempo de siesta" << endl;
 
 	for (int i = 0; i < lista_lecturas -> obtener_cantidad(); i++)
 	{
 		cout << arbol_expansion_minima[i] << " - " << i << "\t\t" << matriz_adyacencia[i][arbol_expansion_minima[i]] << endl;
 	}
-
+	*/
 	cout << "El tiempo máximo de lectura es: " << tiempo_max_lectura(&arbol_expansion_minima) << endl;
 	cout << "El orden recomendado de lectura es el siguiente:" << endl;
 };

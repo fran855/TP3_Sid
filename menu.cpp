@@ -6,16 +6,16 @@ Menu::Menu(Lista<Lectura> *lista_lecturas, Hashing *tabla_escritores)
 {
     this->lista_lecturas = lista_lecturas;
     this->tabla_escritores = tabla_escritores;
-    this -> cola_creada = false;
+    this->cola_creada = false;
 
     srand(time(NULL)); // Inicializar semilla
 }
 
-void Menu::ejecutar_menu(Cola<Lectura>* cola_lecturas)
+void Menu::ejecutar_menu(Cola<Lectura> *cola_lecturas)
 {
     string auxiliar;
     do
-    {
+    {        
         cout << MSJ_CABECERA_MENU << endl;
         cin >> eleccion;
         cout << endl;
@@ -91,6 +91,12 @@ void Menu::ejecutar_menu(Cola<Lectura>* cola_lecturas)
             cout << endl;
             break;
 
+        case TIEMPO_MINIMO_LECTURA:
+            tiempo_minimo_lectura();
+            cout << RAYITAS << endl;
+            cout << endl;
+            break;
+
         case SALIR:
             return;
 
@@ -98,10 +104,19 @@ void Menu::ejecutar_menu(Cola<Lectura>* cola_lecturas)
             break;
         }
 
+        cout << MSJ_CONSULTA_MENU;
+        getline(cin, auxiliar);
+        if(auxiliar == "s")
+            cout << endl;
+        else
+            eleccion = SALIR;
+
     } while (eleccion != SALIR);
+
+    cout << MSJ_SALIDA << endl;
 }
 
-Escritor* Menu::obtener_autor(Hashing* tabla_escritores)
+Escritor *Menu::obtener_autor(Hashing *tabla_escritores)
 {
     string nombre_apellido;
     cout << MSJ_INRGESAR_REFERENCIA_AUTOR << endl;
@@ -112,10 +127,10 @@ Escritor* Menu::obtener_autor(Hashing* tabla_escritores)
         return nullptr;
     }
 
-    return tabla_escritores -> consulta(nombre_apellido);    
+    return tabla_escritores->consulta(nombre_apellido);
 }
 
-char* Menu::obtener_tema(string tema)
+char *Menu::obtener_tema(string tema)
 {
     char *copia = new char[tema.size() + 1];
     copy(tema.begin(), tema.end(), copia);
@@ -166,7 +181,7 @@ void Menu::nueva_lectura()
         {
             cout << MSJ_INGRESAR_TEMA << endl;
             getline(cin, auxiliar, '\n');
-            char* tema = obtener_tema(auxiliar);
+            char *tema = obtener_tema(auxiliar);
             autor = obtener_autor(tabla_escritores);
             nueva_lectura = new Novela_historica('H', titulo, minutos, anio, tema, autor);
             lista_lecturas->alta(nueva_lectura);
@@ -181,7 +196,7 @@ void Menu::nueva_lectura()
     else if (tipo_lectura == 'p')
     {
         cout << MSJ_INGRESAR_VERSOS << endl;
-        int versos;        
+        int versos;
         cin >> versos;
         getline(cin, auxiliar, '\n'); // Limpiar buffer
         autor = obtener_autor(tabla_escritores);
@@ -236,13 +251,12 @@ void Menu::cambiar_dato_escritor()
     getline(cin, referencia, '\n');
     cout << MSJ_ANIO_FALLECIMIENTO << endl;
     cin >> anio_fallecimiento_actualizado;
-    Escritor *escritor = tabla_escritores-> consulta(referencia);
+    Escritor *escritor = tabla_escritores->consulta(referencia);
 
-    if(escritor != nullptr){
-        escritor -> cambiar_fallecimiento(anio_fallecimiento_actualizado);
-
+    if (escritor != nullptr)
+    {
+        escritor->cambiar_fallecimiento(anio_fallecimiento_actualizado);
     }
-
 }
 
 void Menu::listar_escritores()
@@ -277,7 +291,7 @@ void Menu::listar_lecturas_anios()
         primer_nodo = primer_nodo->obtener_siguiente();
     }
 
-    while (primer_nodo != NULL && primer_nodo->obtener_dato()-> obtener_anio() <= cota_superior)
+    while (primer_nodo != NULL && primer_nodo->obtener_dato()->obtener_anio() <= cota_superior)
     {
         primer_nodo->obtener_dato()->mostrar();
         cout << endl;
@@ -337,40 +351,55 @@ void Menu::listar_novelas_genero()
     }
 }
 
-void Menu::crear_cola(Cola<Lectura>* cola_lecturas){
-        string auxiliar;
-        char fue_leido;
+void Menu::crear_cola(Cola<Lectura> *cola_lecturas)
+{
+    string auxiliar;
+    char fue_leido;
 
-        if(cola_creada == false){
-            cola_lecturas -> encolar(lista_lecturas);
-            cola_creada = true;
-        }
-    
-        cout << MSJ_MOSTRAR_COLA << endl;
-        cola_lecturas -> consulta();
+    if (cola_creada == false)
+    {
+        cola_lecturas->encolar(lista_lecturas);
+        cola_creada = true;
+    }
 
-        cout << MSJ_HA_LEIDO << endl;
-        cin >> fue_leido;
-        getline(cin, auxiliar, '\n'); // Limpiar buffer
+    cout << MSJ_MOSTRAR_COLA << endl;
+    cola_lecturas->consulta();
 
-        fue_leido = tolower(fue_leido);
+    cout << MSJ_HA_LEIDO << endl;
+    cin >> fue_leido;
+    getline(cin, auxiliar, '\n'); // Limpiar buffer
 
-        if(fue_leido == 's'){
-            cola_lecturas -> baja();
-            if(!cola_lecturas -> vacia()){
-                cout << MSJ_MOSTRAR_COLA << endl;
-                cola_lecturas -> consulta();
-            }else{
-                cout << MSJ_COLA_VACIA << endl;
-                cola_creada = false;
-            }
-        }else{
-            cout << MSJ_NO_HA_LEIDO << endl;
+    fue_leido = tolower(fue_leido);
+
+    if (fue_leido == 's')
+    {
+        cola_lecturas->baja();
+        if (!cola_lecturas->vacia())
+        {
             cout << MSJ_MOSTRAR_COLA << endl;
-            cola_lecturas -> consulta();
+            cola_lecturas->consulta();
         }
-
+        else
+        {
+            cout << MSJ_COLA_VACIA << endl;
+            cola_creada = false;
+        }
+    }
+    else
+    {
+        cout << MSJ_NO_HA_LEIDO << endl;
+        cout << MSJ_MOSTRAR_COLA << endl;
+        cola_lecturas->consulta();
+    }
 }
 
-Menu::~Menu(){
+void Menu::tiempo_minimo_lectura()
+{
+    Grafo grafo(lista_lecturas);
+    grafo.generar_grafo();
+    grafo.arbol_expansion_minima();
+}
+
+Menu::~Menu()
+{
 }

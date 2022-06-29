@@ -15,10 +15,11 @@
 #include "novela_historica.h"
 #include "genero.h"
 #include "hashing.h"
+#include "grafo.h"
 
 using namespace std;
 
-const string MSJ_CABECERA_MENU = "Bienvenido al club de lectura de Sid!\nIngresa a continuacion la opcion deseada:\n\n1. Agregar una lectura a la lista.\n2. Quitar una lectura de la lista.\n3. Agregar un escritor.\n4. Cambiar fecha de fallecimiento de un autor.\n5. Listar los escritores.\n6. Mostrar una lectura random!\n7. Mostrar todas las lecturas.\n8. Mostrar lecturas en un periodo de años.\n9. Mostrar lecturas segun autor.\n10. Mostrar novelas segun genero.\n11. Mostrar el próximo elemento de menor cantidad de minutos sin  leer.\n12. Salir del club de lectura.";
+const string MSJ_CABECERA_MENU = "Bienvenido al club de lectura de Sid!\nIngresa a continuacion la opcion deseada:\n\n1. Agregar una lectura a la lista.\n2. Quitar una lectura de la lista.\n3. Agregar un escritor.\n4. Cambiar fecha de fallecimiento de un autor.\n5. Listar los escritores.\n6. Mostrar una lectura random!\n7. Mostrar todas las lecturas.\n8. Mostrar lecturas en un periodo de años.\n9. Mostrar lecturas segun autor.\n10. Mostrar novelas segun genero.\n11. Mostrar el próximo elemento de menor cantidad de minutos sin  leer.\n12. Mostrar el tiempo mínimo de lectura.\n13. Salir del club de lectura.";
 const string MSJ_INGRESAR_TIPO_LECTURA = "Ingrese N (Novela), C (Cuento) o P (Poeta):";
 const string MSJ_INGRESAR_TITULO = "Ingrese el titulo de la obra:";
 const string MSJ_INGRESAR_LIBRO = "Ingrese el libro:";
@@ -46,6 +47,7 @@ const string MSJ_INGRESAR_NACIMIENTO = "Ingrese el año de nacimiento del escrit
 const string MSJ_INGRESAR_FALLECIMIENTO = "Ingrese el año de fallecimiento del escritor:";
 const string MSJ_COLA_VACIA = "¡No hay más lecturas! Hiciste feliz a Sid :)";
 const string MSJ_NO_HA_LEIDO = "No seas perezoso como Sid, lee la obra:";
+const string MSJ_CONSULTA_MENU = "¿Desea ejecutar el menú? (s/n): ";
 const string MSJ_SALIDA = "¡Hasta luego!\nSid.";
 const string RAYITAS = "-----------------------------------------------------";
 
@@ -61,6 +63,7 @@ enum Opciones_menu {
     LISTAR_LECTURAS_ESCRITOR,
     LISTAR_NOVELAS_GENERO,
     CREAR_COLA,
+    TIEMPO_MINIMO_LECTURA,
     SALIR
 };
 
@@ -159,6 +162,11 @@ private:
     // PRE: -
     // POS: se crea una cola de lecturas
     void crear_cola(Cola<Lectura>* cola_lecturas);
+
+    // Tiempo mínimo de lectura
+    // PRE: -
+    // POS: se crea un árbol de expansión mínima para mostrar el tiempo de lectura mínima de todas las obras y el orden correspondiente
+    void tiempo_minimo_lectura();
 };
 
 #endif
