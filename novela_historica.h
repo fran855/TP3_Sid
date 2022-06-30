@@ -34,6 +34,13 @@ public:
   // POS: Muestra los datos de la novela historica
   void mostrar();
 
+
+  // Mostrar si una obra pertenece a un genero determinado
+  // PRE: -
+  // POS: Muestra si la obra pertenece al genero indicado
+  void mostrar_si_genero(genero_t genero);
+
+
   // Destructor
   // PRE: -
   // POS: -

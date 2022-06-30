@@ -24,6 +24,13 @@ void Novela_historica::mostrar(){
   }
 }
 
+
+void Novela_historica::mostrar_si_genero(genero_t genero){
+    if(this->genero == genero){
+        mostrar();
+      }
+}
+
 // Destructor
 Novela_historica::~Novela_historica(){
   delete[] tema;

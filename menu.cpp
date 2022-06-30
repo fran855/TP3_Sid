@@ -17,6 +17,7 @@ void Menu::ejecutar_menu(Cola<Lectura> *cola_lecturas)
     do
     {        
         cout << MSJ_CABECERA_MENU << endl;
+        cout << MSJ_OPCION;
         cin >> eleccion;
         cout << endl;
         getline(cin, auxiliar, '\n'); // Limpiar buffer
@@ -204,6 +205,7 @@ void Menu::nueva_lectura()
         nueva_lectura = new Poema('P', titulo, minutos, anio, versos, autor);
         lista_lecturas->alta(nueva_lectura);
     }
+    cout << MSJ_LECTURA_AGREGADA_OK << endl;
 }
 
 void Menu::quitar_lectura()
@@ -221,6 +223,7 @@ void Menu::quitar_lectura()
     }
 
     lista_lecturas->baja(posicion);
+    cout << MSJ_LECTURA_QUITADA_OK ;
 }
 
 void Menu::agregar_escritor()
@@ -243,6 +246,8 @@ void Menu::agregar_escritor()
 
     Escritor *nuevo_escritor = new Escritor(isni, nombre_apellido, nacionalidad, anio_nacimiento, anio_fallecimiento);
     tabla_escritores->alta(nuevo_escritor);
+
+    cout << MSJ_ESCRITOR_AGREGADO_OK;
 }
 
 void Menu::cambiar_dato_escritor()
@@ -263,11 +268,13 @@ void Menu::cambiar_dato_escritor()
 
 void Menu::listar_escritores()
 {
+    cout << MSJ_LISTA_ESCRITORES_MOSTRAR << endl;
     tabla_escritores->mostrar();
 }
 
 void Menu::mostrar_lectura_random()
 {
+    cout << MSJ_LECTURA_RANDOM << endl;
     int maximo = lista_lecturas->obtener_cantidad();
     int posicion = rand() % maximo + 1;
     lista_lecturas->consulta(posicion)->mostrar();
@@ -275,6 +282,7 @@ void Menu::mostrar_lectura_random()
 
 void Menu::listar_lecturas_todas()
 {
+    cout << MSJ_LISTA_LECTURAS_MOSTRAR << endl;
     lista_lecturas->mostrar();
 }
 
@@ -293,6 +301,8 @@ void Menu::listar_lecturas_anios()
         primer_nodo = primer_nodo->obtener_siguiente();
     }
 
+    cout << MSJ_LECTURAS_ENTRE_ANIOS << endl;
+    
     while (primer_nodo != NULL && primer_nodo->obtener_dato()->obtener_anio() <= cota_superior)
     {
         primer_nodo->obtener_dato()->mostrar();
@@ -309,6 +319,7 @@ void Menu::listar_lecturas_escritor()
     cout << endl;
     Nodo<Lectura> *nodo_actual = lista_lecturas->obtener_nodo(1);
 
+    cout << MSJ_LECTURAS_AUTORES << nombre_apellido << MSJ_LECTURAS_AUTORES_2 << endl;
     if (nombre_apellido == "ANONIMO")
     {
         while (nodo_actual->obtener_siguiente() != NULL)
@@ -346,6 +357,7 @@ void Menu::listar_novelas_genero()
 
     Nodo<Lectura> *nodo_actual = lista_lecturas->obtener_nodo(1);
 
+    cout << MSJ_NOVELAS_GENERO << endl;
     while (nodo_actual->obtener_siguiente() != NULL)
     {
         nodo_actual->obtener_dato()->mostrar_si_genero(genero);
@@ -367,7 +379,7 @@ void Menu::crear_cola(Cola<Lectura> *cola_lecturas)
     cout << MSJ_MOSTRAR_COLA << endl;
     cola_lecturas->consulta();
 
-    cout << MSJ_HA_LEIDO << endl;
+    cout << MSJ_HA_LEIDO;
     cin >> fue_leido;
     getline(cin, auxiliar, '\n'); // Limpiar buffer
 
