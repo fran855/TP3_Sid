@@ -26,8 +26,8 @@ void Novela_historica::mostrar(){
 
 
 void Novela_historica::mostrar_si_genero(genero_t genero){
-    if(this->genero == genero){
-        mostrar();
+    if(genero == HISTORICA){
+        this -> mostrar();
       }
 }
 

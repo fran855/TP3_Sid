@@ -26,8 +26,8 @@ void Novela :: mostrar_genero(){
 
 // Mostrar si una obra pertenece a un genero determinado
 void Novela::mostrar_si_genero(genero_t genero){
-  if(this->genero == genero){
-    mostrar();
+  if(this -> genero == genero){
+    this -> mostrar();
   }
 }
 

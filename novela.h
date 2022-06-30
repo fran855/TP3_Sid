@@ -23,10 +23,10 @@ public:
   // POS: Muestra a que genero pertenece la novela
   void mostrar_genero();
 
-  // Mostrar titulo
+  // Obtener genero
   // PRE: -
-  // POS: Devuelve titulo del libro donde esta el cuento
-  genero_t obtener_genero();
+  // POS: Devuelve el genero de la novela
+  virtual genero_t obtener_genero();
 
   // Mostrar si una obra pertenece a un genero determinado
   // PRE: -
