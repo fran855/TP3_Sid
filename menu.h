@@ -32,7 +32,7 @@ const string MSJ_INRGESAR_INFO_LECTURA = "Ingrese la informacion correspondiente
 const string MSJ_INRGESAR_REFERENCIA_AUTOR = "Ingrese el nombre y apellido del autor correspondiente:";
 const string MSJ_BAJA_LISTA = "Ingrese el nombre de la lectura que quiere quitar:";
 const string MSJ_ESCRITOR_FALLECIMIENTO = "Ingrese el nombre y apellido del autor cuyo fallecimiento quiere actualizar:";
-const string MSJ_ANIO_FALLECIMIENTO = "Inrgese el año actualizado de fallecimiento:";
+const string MSJ_ANIO_FALLECIMIENTO = "Ingrese el año actualizado de fallecimiento:";
 const string MSJ_INTERVALO_ANIOS_DESDE = "Ingrese el año de inicio:";
 const string MSJ_INTERVALO_ANIOS_HASTA = "Ingrese el año de fin:";
 const string MSJ_LISTAR_LECTURAS_ESCRITOR = "Ingrese el nombre y apellido del escritor para ver sus obras:";
@@ -47,7 +47,9 @@ const string MSJ_INGRESAR_FALLECIMIENTO = "Ingrese el año de fallecimiento del 
 const string MSJ_COLA_VACIA = "¡No hay más lecturas! Hiciste feliz a Sid :)";
 const string MSJ_NO_HA_LEIDO = "\nNo seas perezoso como Sid, lee la obra:\n";
 const string MSJ_CONSULTA_MENU = "¿Desea ejecutar el menú? (s/n): ";
-const string MSJ_SALIDA = "¡Hasta luego!\nSid.";
+const string MSJ_NO_LECTURAS_ENTRE_ANIOS = "No hay lecturas entre esos años";
+const string MSJ_NO_LECTURAS_AUTOR = "No hay lecturas de este autor.";
+const string MSJ_SALIDA = "¡Hasta luego!\nSid.\n";
 const string RAYITAS = "-----------------------------------------------------";
 
 const string MSJ_LECTURA_AGREGADA_OK = "\n¡Lectura agregada con éxito!\n";
@@ -55,14 +57,13 @@ const string MSJ_LECTURA_QUITADA_OK = "\n¡Lectura quitada con éxito!\n";
 const string MSJ_ESCRITOR_AGREGADO_OK = "\nEscritor agregado con éxito.\n";
 const string MSJ_FECHA_CAMBIADA_OK = "\nFecha cambiada con éxito.\n";
 const string MSJ_LISTA_ESCRITORES_MOSTRAR = "\nLista de escritores:\n";
-const string MSJ_LECTURA_RANDOM = "\nPrueba leyendo:\n";
+const string MSJ_LECTURA_RANDOM = "\nProbá leyendo:\n";
 const string MSJ_LISTA_LECTURAS_MOSTRAR = "\nLista de lecturas:\n";
 const string MSJ_LECTURAS_ENTRE_ANIOS = "\nLas lecturas entre aquellos años son:\n";
 const string MSJ_LECTURAS_AUTORES = "\nLas lecturas de ";
 const string MSJ_LECTURAS_AUTORES_2 = " que tenemos disponibles son:\n";
 const string MSJ_NOVELAS_GENERO = "\nLas lecturas pertenecientes a este género que tenemos disponibles son:\n";
-const string MSJ_OPCION = "\nOpción:";
-
+const string MSJ_OPCION = "\nOpción: ";
 
 
 enum Opciones_menu {

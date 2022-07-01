@@ -292,6 +292,7 @@ void Menu::listar_lecturas_todas()
 void Menu::listar_lecturas_anios()
 {
     int cota_inferior, cota_superior;
+    bool encontro = false;
     cout << MSJ_INTERVALO_ANIOS_DESDE << endl;
     cin >> cota_inferior;
     cin.ignore(256, '\n'); // limpio buffer
@@ -310,15 +311,21 @@ void Menu::listar_lecturas_anios()
     
     while (primer_nodo != NULL && primer_nodo->obtener_dato()->obtener_anio() <= cota_superior)
     {
+        encontro = true;
         primer_nodo->obtener_dato()->mostrar();
         cout << endl;
         primer_nodo = primer_nodo->obtener_siguiente();
+    }
+
+    if(!encontro){
+        cout << MSJ_NO_LECTURAS_ENTRE_ANIOS << endl;
     }
 }
 
 void Menu::listar_lecturas_escritor()
 {
     string nombre_apellido;
+    bool encontro = false;
     cout << MSJ_LISTAR_LECTURAS_ESCRITOR << endl;
     getline(cin, nombre_apellido, '\n');
     cout << endl;
@@ -331,6 +338,7 @@ void Menu::listar_lecturas_escritor()
         {
             if (nodo_actual->obtener_dato()->obtener_autor() == NULL)
             {
+                encontro = true;
                 nodo_actual->obtener_dato()->mostrar();
             }
             nodo_actual = nodo_actual->obtener_siguiente();
@@ -344,12 +352,17 @@ void Menu::listar_lecturas_escritor()
             {
                 if (nodo_actual->obtener_dato()->obtener_autor()->obtener_nombre_apellido() == nombre_apellido)
                 {
+                    encontro = true;
                     nodo_actual->obtener_dato()->mostrar();
                     cout << endl;
                 }
             }
             nodo_actual = nodo_actual->obtener_siguiente();
         }
+    }
+
+    if(!encontro){
+        cout << MSJ_NO_LECTURAS_AUTOR << endl;
     }
 }
 
