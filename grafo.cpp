@@ -189,7 +189,10 @@ int Grafo::tiempo_max_lectura(int **arbol_expansion_minima)
 	// acumulo los tiempos de siestas entre lecturas
 	for (int i = 0; i < lista_lecturas->obtener_cantidad(); i++)
 	{
-		tiempo_maximo += matriz_adyacencia[i][(*arbol_expansion_minima)[i]];
+		if (i != 0)
+		{
+			tiempo_maximo += matriz_adyacencia[i][(*arbol_expansion_minima)[i]];
+		}
 	}
 
 	Nodo<Lectura> *actual = lista_lecturas->obtener_nodo(1);
