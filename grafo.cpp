@@ -216,8 +216,8 @@ void Grafo::imprimir_aem(int *arbol_expansion_minima)
 		cout << arbol_expansion_minima[i] << " - " << i << "\t\t" << matriz_adyacencia[i][arbol_expansion_minima[i]] << endl;
 	}
 	*/
-	cout << "El tiempo máximo de lectura es: " << tiempo_max_lectura(&arbol_expansion_minima) << endl;
-	cout << "El orden recomendado de lectura es el siguiente:" << endl;
+	cout << "El tiempo máximo de lectura es: " << tiempo_max_lectura(&arbol_expansion_minima) << "\n" << endl;
+	cout << "El orden recomendado de lectura es el siguiente:" << "\n" << endl;
 };
 
 void Grafo::arbol_expansion_minima()

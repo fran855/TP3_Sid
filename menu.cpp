@@ -151,19 +151,19 @@ void Menu::nueva_lectura()
 
     cout << MSJ_INGRESAR_TIPO_LECTURA << endl;
     cin >> tipo_lectura;
+    cin.ignore(256, '\n'); // limpio buffer
     tipo_lectura = (char)tolower(tipo_lectura);
-    getline(cin, auxiliar, '\n'); // Limpiar buffer
 
     cout << MSJ_INGRESAR_TITULO << endl;
     getline(cin, titulo, '\n');
 
     cout << MSJ_INGRESAR_MINUTOS << endl;
     cin >> minutos;
-    getline(cin, auxiliar, '\n'); // Limpiar buffer
+    cin.ignore(256, '\n'); // limpio buffer
 
     cout << MSJ_INGRESAR_ANIO << endl;
     cin >> anio;
-    getline(cin, auxiliar, '\n'); // Limpiar buffer
+    cin.ignore(256, '\n'); // limpio buffer
 
     if (tipo_lectura == 'c')
     {
@@ -200,7 +200,7 @@ void Menu::nueva_lectura()
         cout << MSJ_INGRESAR_VERSOS << endl;
         int versos;
         cin >> versos;
-        getline(cin, auxiliar, '\n'); // Limpiar buffer
+        cin.ignore(256, '\n'); // limpio buffer
         autor = obtener_autor(tabla_escritores);
         nueva_lectura = new Poema('P', titulo, minutos, anio, versos, autor);
         lista_lecturas->alta(nueva_lectura);
@@ -234,15 +234,17 @@ void Menu::agregar_escritor()
 
     cout << MSJ_INGRESAR_ISNI << endl;
     cin >> isni;
-    getline(cin, auxiliar, '\n'); // Limpiar buffer
+    cin.ignore(256, '\n'); // limpio buffer
     cout << MSJ_INGRESAR_NOMBRE << endl;
     getline(cin, nombre_apellido, '\n');
     cout << MSJ_INGRESAR_NACIONALIDAD << endl;
     getline(cin, nacionalidad, '\n');
     cout << MSJ_INGRESAR_NACIMIENTO << endl;
     cin >> anio_nacimiento;
+    cin.ignore(256, '\n'); // limpio buffer
     cout << MSJ_INGRESAR_FALLECIMIENTO << endl;
     cin >> anio_fallecimiento;
+    cin.ignore(256, '\n'); // limpio buffer
 
     Escritor *nuevo_escritor = new Escritor(isni, nombre_apellido, nacionalidad, anio_nacimiento, anio_fallecimiento);
     tabla_escritores->alta(nuevo_escritor);
@@ -258,6 +260,7 @@ void Menu::cambiar_dato_escritor()
     getline(cin, referencia, '\n');
     cout << MSJ_ANIO_FALLECIMIENTO << endl;
     cin >> anio_fallecimiento_actualizado;
+    cin.ignore(256, '\n');  // limpio buffer
     Escritor *escritor = tabla_escritores->consulta(referencia);
 
     if (escritor != nullptr)
@@ -291,8 +294,10 @@ void Menu::listar_lecturas_anios()
     int cota_inferior, cota_superior;
     cout << MSJ_INTERVALO_ANIOS_DESDE << endl;
     cin >> cota_inferior;
+    cin.ignore(256, '\n'); // limpio buffer
     cout << MSJ_INTERVALO_ANIOS_HASTA << endl;
     cin >> cota_superior;
+    cin.ignore(256, '\n'); // limpio buffer
 
     Nodo<Lectura> *primer_nodo = lista_lecturas->obtener_nodo(1);
 
@@ -353,12 +358,13 @@ void Menu::listar_novelas_genero()
     string aux;
     cout << MSJ_INGRESAR_GENERO_BUSCAR << endl;
     cin >> aux;
+    cin.ignore(256, '\n'); // limpio buffer
     genero_t genero = string_to_genero(aux);
 
     Nodo<Lectura> *nodo_actual = lista_lecturas->obtener_nodo(1);
 
     cout << MSJ_NOVELAS_GENERO << endl;
-    while (nodo_actual->obtener_siguiente() != NULL)
+    while (nodo_actual != NULL)
     {
         nodo_actual->obtener_dato()->mostrar_si_genero(genero);
         nodo_actual = nodo_actual->obtener_siguiente();
@@ -381,7 +387,7 @@ void Menu::crear_cola(Cola<Lectura> *cola_lecturas)
 
     cout << MSJ_HA_LEIDO;
     cin >> fue_leido;
-    getline(cin, auxiliar, '\n'); // Limpiar buffer
+    cin.ignore(256, '\n'); // limpio buffer
 
     fue_leido = (char)tolower(fue_leido);
 
