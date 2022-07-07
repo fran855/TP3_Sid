@@ -41,7 +41,7 @@ void Hashing::alta(Escritor *escritor){
     int j;
     for(j = 0; j < n_ocupados && ocupados[j] != pos; j++){
     }
-    if(j == n_ocupados){
+    if(j == n_ocupados && ocupados[j] != pos){
         ocupados[n_ocupados] = pos;
         n_ocupados++;
     }
@@ -64,12 +64,14 @@ Escritor* Hashing::consulta(int isni){
 
 Escritor* Hashing::consulta(string nombre_apellido){
     Escritor* escritor = nullptr;
-    for(int i = 0; i < n_ocupados; i++){
+    bool flag = true;
 
+    for(int i = 0; i < n_ocupados; i++){
         Nodo<Escritor> *actual = tabla[ocupados[i]]->obtener_nodo(1);
-        while (actual != nullptr){
+        while (actual != nullptr && flag){
             if (actual->obtener_dato()->obtener_nombre_apellido() == nombre_apellido){
                 escritor = actual->obtener_dato();
+                flag = false;
             }
             actual = actual->obtener_siguiente();
         }
@@ -80,11 +82,19 @@ Escritor* Hashing::consulta(string nombre_apellido){
 
 void Hashing::baja(int isni){
     int pos = isni % n;
+    bool flag = true;
     Nodo<Escritor> *actual = tabla[pos]->obtener_nodo(1);
     int i = 1;
-    while (actual != nullptr){
+    while (actual != nullptr && flag){
         if (actual->obtener_dato()->obtener_isni() == isni){
             tabla[pos]->baja(i);
+            int j;
+                for(j = 0; ocupados[j] != i && j < n_ocupados; j++){
+                }
+                for(; j < n_ocupados - 1; j++){
+                    ocupados[j] = ocupados[j + 1];
+                }
+            flag = false;
         }
         actual = actual->obtener_siguiente();
         i++;
